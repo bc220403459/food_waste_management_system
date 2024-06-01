@@ -72,11 +72,6 @@
 </head>
 
 <body>
-
-
-
-
-
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">Dashboard</a>
@@ -87,14 +82,7 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <!-- <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Home</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Link</a>
-        </li> -->
                     <li class="nav-item dropdown">
-
                     </li>
                 </ul>
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0 profile-menu">
@@ -104,8 +92,6 @@
                             <div class="profile-pic">
                                 <img src="user.jpg" alt="Profile Picture">
                             </div>
-                            <!-- You can also use icon as follows: -->
-                            <!--  <i class="fas fa-user"></i> -->
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <li><a class="dropdown-item" href="#"><i class="fas fa-sliders-h fa-fw"></i> Account</a>
@@ -126,57 +112,6 @@
             </div>
         </div>
     </nav>
-
-
-
-
-
-
-    <!-- 
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="#"></a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Link</a>
-      </li>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Dropdown
-        </a>
-        
-      </li>
-      
-    </ul>
-
-
-
-
-  </div>
-</nav> -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     <section class="vh-100 gradient-custom">
         <div class="container py-5 h-100">
             <div class="row justify-content-center align-items-center h-100">
@@ -244,58 +179,6 @@
                                     </tr>
                                 </table>
                             </div>
-                            <!-- <form>
-
-  <input type="text" id="firstName" class="form-control form-control" style="font-style:italic" placeholder="Item ID (this will be automatically generated)..."/>
-</div>
-                </div>
-            </div>
-              <div class="row">
-                <div class="col-md-6 mb-4">
-
-                  <div data-mdb-input-init class="form-outline">
-                    <input type="text" id="firstName" class="form-control form-control" placeholder="Food item name..."/>
-                  </div>
-
-                </div>
-                <div class="col-md-6 mb-4">
-
-                  <div data-mdb-input-init class="form-outline">
-                    <input type="number" id="lastName" class="form-control form-control" placeholder="Quantity..." />
-                  </div>
-
-                </div>
-              </div>
-
-              <div class="row">
-                <div class="col-md-6 mb-4 d-flex align-items-center">
-
-                  <div data-mdb-input-init class="form-outline datepicker w-100">
-                  <h6 class="mb-2 pb-1">Expiry Date: </h6>
-                    <input id="startDate" class="form-control" type="date" placeholder="Enter date of birth..." />
-                  </div>
-
-                </div>
-                <div class="col-md-6 mb-4">
-                <h6 class="">Storage Location </h6>
-                  <select class="select form-control">
-                    <option value="2">Rawalpindi Branch</option>
-                    <option value="3">Lahore Branch</option>
-                    <option value="4">Multan Branch</option>
-                    <option value="5">Karachi Branch</option>
-                  </select>
- 
-
-                </div>
-              </div>
-
-              <div class="mt-4 pt-2 text-center">
-                <input data-mdb-ripple-init class="btn btn-info btn-lg" type="submit" value="Add item" />
-              </div>
-              <div class="mt-2 mb-3 text-end">
-                <i class="bi bi-qr-code-scan"></i> Add item using QR code
-              </div>
-            </form> -->
                         </div>
                     </div>
                 </div>
