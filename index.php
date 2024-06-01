@@ -1,4 +1,10 @@
 <!doctype html>
+<?php
+include('./functions.php');
+$image=fileNameWithBasePath("images/banner.png");
+?>
+<img src="<?php $image ?>"/>
+<?php exit ?>
 <html lang="en">
 
 <head>
