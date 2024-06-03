@@ -32,6 +32,10 @@ include (fileNameWithBasePath('/includes/header.php'));
                 height: 100%;
             }
         }
+
+        .rounded-image{
+            
+        }
     </style>
 </head>
 
@@ -40,7 +44,7 @@ include (fileNameWithBasePath('/includes/header.php'));
         <div class="container-fluid h-custom">
             <div class="row d-flex justify-content-center align-items-center h-100">
                 <div class="col-md-9 col-lg-6 col-xl-5">
-                    <img src="images/banner.png" class="img-fluid" alt="Sample image">
+                    <img src="images/banner.png" class="img-fluid rounded-image" alt="Sample image">
                 </div>
                 <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
                     <h1 class="text-center mb-5" style="text-align:center !important">Login</h1>
