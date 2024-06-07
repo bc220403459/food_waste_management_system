@@ -1,3 +1,4 @@
+<?php include ("../includes/header.php") ?>
 <!doctype html>
 <html lang="en">
 
@@ -39,13 +40,13 @@
         <div class="card shadow-2-strong card-registration" style="border-radius: 15px;">
           <div class="card-body p-4 p-md-5">
             <h3 class="mb-4 pb-2 pb-md-0 mb-md-5 text-center">Sign up</h3>
-            <form>
+            <form action="../backend/create_user.php" method="post">
 
               <div class="row">
                 <div class="col-md-6 mb-4">
 
                   <div data-mdb-input-init class="form-outline">
-                    <input type="text" id="firstName" class="form-control form-control" placeholder="Enter you first name..."/>
+                    <input type="text" id="f_name" name="f_name" class="form-control form-control" placeholder="Enter you first name..." required />
                     <!-- <label class="form-label" for="firstName">First Name</label> -->
                   </div>
 
@@ -53,7 +54,7 @@
                 <div class="col-md-6 mb-4">
 
                   <div data-mdb-input-init class="form-outline">
-                    <input type="text" id="lastName" class="form-control form-control" placeholder="Enter you last name..." />
+                    <input type="text" id="l_name" name="l_name" class="form-control form-control" placeholder="Enter you last name..." required />
                     <!-- <label class="form-label" for="lastName">Last Name</label> -->
                   </div>
 
@@ -65,7 +66,7 @@
 
                   <div data-mdb-input-init class="form-outline datepicker w-100">
                   <h6 class="mb-2 pb-1">Date of Birth: </h6>
-                    <input id="startDate" class="form-control" type="date" placeholder="Enter date of birth..." />
+                    <input id="dob" name="dob" class="form-control" type="date" placeholder="Enter date of birth..." required />
                     <!-- <input type="text" class="form-control form-control-lg" id="birthdayDate" />
                     <label for="birthdayDate" class="form-label">Birthday</label> -->
                   </div>
@@ -75,20 +76,23 @@
 
                   <h6 class="mb-2 pb-1">Gender: </h6>
 
+                  
                   <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="femaleGender"
-                      value="option1" checked />
-                    <label class="form-check-label" for="femaleGender">Female</label>
-                  </div>
-
-                  <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="maleGender"
-                      value="option2" />
+                    <input class="form-check-input" type="radio" name="gender" id="maleGender"
+                      value="male"  />
                     <label class="form-check-label" for="maleGender">Male</label>
                   </div>
 
+
                   <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="otherGender"
+                    <input class="form-check-input" type="radio" name="gender" id="femaleGender"
+                      value="female"  />
+                    <label class="form-check-label" for="femaleGender">Female</label>
+                  </div>
+
+
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="gender" id="otherGender"
                       value="option3" />
                     <label class="form-check-label" for="otherGender">Other</label>
                   </div>
@@ -100,7 +104,7 @@
                 <div class="col-md-6 mb-4 pb-2">
 
                   <div data-mdb-input-init class="form-outline">
-                    <input type="email" id="emailAddress" class="form-control form-control" placeholder="Enter email address"/>
+                    <input type="email" id="email" name="email" class="form-control form-control" placeholder="Enter email address" required/>
                     <!-- <label class="form-label" for="emailAddress">Email</label> -->
                   </div>
 
@@ -108,7 +112,7 @@
                 <div class="col-md-6 mb-4 pb-2">
 
                   <div data-mdb-input-init class="form-outline">
-                    <input type="password" id="phoneNumber" class="form-control form-control" placeholder="Enter password" />
+                    <input type="password" id="password" name="password" class="form-control form-control" placeholder="Enter password"  required/>
                   </div>
 
                 </div>
@@ -117,13 +121,14 @@
               <div class="row">
                 <div class="col-md-6 mb-4 pb-2">
                 <h6 class="">Dietary Preferences </h6>
-                  <select class="select form-control">
-                    <option value="2">Vegan</option>
-                    <option value="3">Vegetarian</option>
-                    <option value="4">Gluten Free</option>
-                    <option value="5">Dairy Free</option>
-                    <option value="6">Low Carb</option>
-                    <option value="7">Ketogenic</option>
+                  <select class="select form-control" name="dietary_preference" required>
+                    <option value="none" selected>None</option>
+                    <option value="vegan">Vegan</option>
+                    <option value="vegetarian">Vegetarian</option>
+                    <option value="gluten_free">Gluten Free</option>
+                    <option value="dairy_free">Dairy Free</option>
+                    <option value="low_carb">Low Carb</option>
+                    <option value="ketogenic">Ketogenic</option>
                   </select>
                   <!-- <label class="form-label select-label">Choose option</label> -->
 
@@ -131,11 +136,12 @@
 
                 <div class="col-md-6 mb-4 pb-2">
                 <h6 class="">Allergy (if any) </h6>
-                  <select class="select form-control">
-                    <option value="2">Egg Allergy</option>
-                    <option value="3">Lactose Intolerance</option>
-                    <option value="4">Wheat allergy</option>
-                    <option value="5">Soy allergy</option>
+                  <select class="select form-control" name="allergy_info" required>
+                    <option value="none">None</option>
+                    <option value="egg_allergy">Egg Allergy</option>
+                    <option value="lactose_intolerance">Lactose Intolerance</option>
+                    <option value="wheat_allergy">Wheat allergy</option>
+                    <option value="soy_allergy">Soy allergy</option>
                   </select>
                   <!-- <label class="form-label select-label">Choose option</label> -->
 
