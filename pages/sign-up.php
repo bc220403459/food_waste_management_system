@@ -41,12 +41,25 @@
           <div class="card-body p-4 p-md-5">
             <h3 class="mb-4 pb-2 pb-md-0 mb-md-5 text-center">Sign up</h3>
             <form action="../backend/create_user.php" method="post">
+              <div class="row">
+                <div class="col mb-4">
+                  <div data-mdb-input-init class="form-outline">
+                    <div class="input-group mb-2">
+                      <div class="input-group-prepend">
+                        <div class="input-group-text">@</div>
+                      </div>
+                      <input type="text" class="form-control" id="username" name="username" placeholder="Username you want...">
+                    </div>
+                    <!-- <input type="text" id="username" name="username" class="form-control form-control" placeholder="Username you want..." required /> -->
+                  </div>
+
+              </div>
 
               <div class="row">
                 <div class="col-md-6 mb-4">
 
                   <div data-mdb-input-init class="form-outline">
-                    <input type="text" id="f_name" name="f_name" class="form-control form-control" placeholder="Enter you first name..." required />
+                    <input type="text" id="f_name" name="f_name" class="form-control form-control" placeholder="Enter your first name..." required />
                     <!-- <label class="form-label" for="firstName">First Name</label> -->
                   </div>
 
@@ -54,7 +67,7 @@
                 <div class="col-md-6 mb-4">
 
                   <div data-mdb-input-init class="form-outline">
-                    <input type="text" id="l_name" name="l_name" class="form-control form-control" placeholder="Enter you last name..." required />
+                    <input type="text" id="l_name" name="l_name" class="form-control form-control" placeholder="Enter your last name..." required />
                     <!-- <label class="form-label" for="lastName">Last Name</label> -->
                   </div>
 

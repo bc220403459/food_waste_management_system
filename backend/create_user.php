@@ -1,5 +1,6 @@
 <?php
 include ("../config/connection.php");
+$username=$_POST['username'];
 $f_name = $_POST['f_name'];
 $l_name = $_POST['l_name'];
 $dob = $_POST['dob'];
@@ -11,6 +12,7 @@ $allergy_info = $_POST['allergy_info'];
 
 $create_user_query = "INSERT INTO `users` 
                 VALUES ('',
+                    '$username',
                     '$f_name',
                     '$l_name',
                     '$dob',

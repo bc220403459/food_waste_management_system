@@ -37,12 +37,12 @@ include ('../includes/header.php');
                 <h1 class="text-center mb-5" style="text-align:center !important">Login</h1>
                 <form action="../backend/login_user.php" method="post">
                     <div data-mdb-input-init class="form-outline mb-4">
-                        <input type="email" name="email" id="email" class="form-control form-control-lg"
-                            placeholder="Enter a valid email address" required  />
+                        <input type="text" name="username" id="username" class="form-control form-control-lg"
+                            placeholder="Enter your username" required  />
                     </div>
                     <div data-mdb-input-init class="form-outline mb-3">
                         <input type="password" name="password" id="password" class="form-control form-control-lg"
-                            placeholder="Enter password"  required />
+                            placeholder="Enter your password"  required />
                     </div>
 
                     <div class="text-center text-lg-start mt-2 pt-2">
