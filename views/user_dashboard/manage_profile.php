@@ -88,6 +88,14 @@ if (mysqli_num_rows($gotUser) > 0) {
                 <div class="col-md-6 mb-4">
                   <h6 class="mb-2 pb-1">Gender: </h6>
                   <div class="form-check form-check-inline">
+                  <input type="radio" name="gender" value="Male" <?php if ($rows['gender'] == 'male') {
+                                                                    echo "checked";
+                                                                } ?>>Male
+                    <input type="radio" name="gender" value="Female" <?php if ($rows['gender'] == 'female') {
+                                                                        echo "checked";
+                                                                } ?>>Female
+                </div>
+                  <!-- <div class="form-check form-check-inline">
                     <input class="form-check-input" type="radio" name="gender" id="maleGender" value="male"  />
                     <label class="form-check-label" for="maleGender">Male</label>
                   </div>
@@ -102,7 +110,7 @@ if (mysqli_num_rows($gotUser) > 0) {
                     <input class="form-check-input" type="radio" name="gender" id="otherGender"
                       value="option3" />
                     <label class="form-check-label" for="otherGender">Other</label>
-                  </div>
+                  </div> -->
 
                 </div>
               </div>
@@ -157,7 +165,7 @@ if (mysqli_num_rows($gotUser) > 0) {
               </div>
 
               <div class="mt-4 pt-2 text-center">
-                <input data-mdb-ripple-init class="btn btn-primary btn-lg" type="submit" value="Update" />
+                <input data-mdb-ripple-init class="btn btn-primary btn-lg" type="submit" value="Update" name="update" />
               </div>
 <?php
  
