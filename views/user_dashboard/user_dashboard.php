@@ -31,6 +31,9 @@ if (!isset($_SESSION['username']))
         <li class="nav-item">
           <a class="nav-link" href="view_inventory.php">Inventory</a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link" href="view_expiry_reminders.php">Expiry Reminder</a>
+        </li>
       </ul>
 
       <div class="collapse navbar-collapse" id="navbarNavDropdown">

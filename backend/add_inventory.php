@@ -1,13 +1,27 @@
 <?php
 include("../config/connection.php");
+include("../core/functions.php");
+include("../includes/header.php");
+// include("../../includes/header.php");
 session_start();
-$user_id=$_SESSION['user_id'];
-$food_id=$_POST['food_id'];
-$item_name=$_POST['item_name'];
-$quantity=$_POST['quantity'];
-$expiry_date=$_POST['$expiry_date'];
-$storage_location=$_POST['storage_location'];
-$add_inventory="INSERT into fooditem VALUE ('$food_id','$user_id','$item_name', '$quantity','$expiry_date','$storage_location')";
-var_dump($add_inventory); exit;
-// var_dump($user_id); exit;
-// $_POST[''];
+// dd($_SESSION);
+// $_SESSION['message']='';
+if (isset($_POST['add_inventory'])){
+    $user_id=$_SESSION['user_id'];
+    $food_id=$_POST['food_id'];
+    $item_name=$_POST['item_name'];
+    $quantity=$_POST['quantity'];
+    $expiry_date=$_POST['expiry_date'];
+    $storage_location=$_POST['storage_location'];
+    $query="INSERT into fooditem VALUE ('$food_id','$user_id','$item_name', '$quantity','$expiry_date','$storage_location')";
+    $add_inventory=mysqli_query($connect,$query);
+    if ($add_inventory){
+        $_SESSION['message']="<div class='alert alert-success' role='alert' style='margin:5%'>Item Added Successfully!</div>";
+        header("location: ../views/user_dashboard/add_inventory.php");
+        session_unset($_SESSION['message']);
+    }
+}
+else{
+    echo "Nothing added! ";
+    exit;
+}
