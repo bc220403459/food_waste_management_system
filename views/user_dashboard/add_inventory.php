@@ -113,8 +113,9 @@ body {
                                 <div class="col-md-6 mb-4 d-flex align-items-center">
                                     <div data-mdb-input-init class="form-outline datepicker w-100">
                                         <h6 class="mb-2 pb-1">Expiry Date: </h6>
-                                        <input id="expiry_date" name="expiry_date" class="form-control" type="date"
-                                            placeholder="Enter expiry date..."  />
+                                        <!-- <input id="expiry_date" name="expiry_date" class="form-control" type="date"
+                                            placeholder="Enter expiry date..."  /> -->
+                                            <input id="expiry_date" name="expiry_date" class="form-control" type="date" placeholder="Enter expiry date..." />
                                     </div>
 
                                 </div>
