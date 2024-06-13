@@ -50,10 +50,16 @@ include("../../core/functions.php");
                 <div class="card shadow-2-strong card-registration" style="border-radius: 15px;">
                     <div class="card-body p-4 p-md-5">
                         <h3 class="mb-4 pb-2 pb-md-0 mb-md-5 text-center">View Inventory</h3>
+                        <div class="text-end" style="margin-top:-5%; margin-bottom:3% !important">
+
+                            <button class="btn btn-primary btn-sm">
+                                <a href="add_inventory.php" class="link">Add Item(s)</a>
+                            </button>
+                        </div>
                         <div class="mt-3">
                             <table class="table table-striped">
                                 <tr>
-                                    <th>Item ID</th>
+                                    <th>SKU</th>
                                     <th>Item Name</th>
                                     <th>Available Stock</th>
                                     <th>Expiry Date</th>
@@ -64,10 +70,10 @@ include("../../core/functions.php");
                                 $allFoodItems = mysqli_query($connect, $query) or die("Failed!");
                                 if (mysqli_num_rows($allFoodItems) > 0) {
                                     while ($row = mysqli_fetch_assoc($allFoodItems)) {
-
                                 ?>
                                         <tr>
-                                            <td><?php echo $row['food_id'] ?></td>
+                                            <td><?php echo $row['sku'] ?></td>
+                                            <?php //echo $row['user_id'] ?>
                                             <td><?php echo $row['item_name'] ?></td>
                                             <td class="text-center"><?php echo $row['quantity'] ?></td>
                                             <td><?php echo getStandardDateFormat($row['expiry_date']) ?></td>
@@ -76,7 +82,9 @@ include("../../core/functions.php");
                                                     <i class="bi bi-pencil-square"></i>
                                                 </button>
                                                 <button class="btn btn-sm btn-danger">
-                                                    <i class="bi bi-trash"></i>
+                                                    <form action="../../backend/delete_item.php" method="post"></form>
+                                                        <a href="../../backend/delete_item.php?id=<?php echo $row['item_id'] ?>"><i class="bi bi-trash"></i></a>
+                                                    </button>
                                                 </button>
                                             </td>
                                         </tr>
@@ -86,7 +94,7 @@ include("../../core/functions.php");
                                     echo "no record";
                                 }
                                 ?>
-                                <tr>
+                                <!-- <tr>
                                     <td>8152</td>
                                     <td>Milk Box</td>
                                     <td class="text-center">40</td>
@@ -99,36 +107,10 @@ include("../../core/functions.php");
                                             <i class="bi bi-trash"></i>
                                         </button>
                                     </td>
-                                </tr>
-                                <tr>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
+                                </tr> -->
                             </table>
                         </div>
-                        <div class="text-end">
-
-                            <button class="btn btn-primary">
-                                <a href="add_inventory.php" class="link">Add Item(s)</a>
-                            </button>
-                        </div>
+                        
                     </div>
                 </div>
             </div>

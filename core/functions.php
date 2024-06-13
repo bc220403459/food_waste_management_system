@@ -8,15 +8,15 @@ function dd($data)
     exit;
 }
 
-function generateRandomString()
-{
-    $alphabets = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    $numbers = "0123456789";
-    $randomAlphabets = substr(str_shuffle($alphabets), 0, 2);
-    $randomNumbers = substr(str_shuffle($numbers), 0, 4);
-    $randomString = $randomAlphabets . $randomNumbers;
-    return $randomString;
-  }
+// function generateRandomString()
+// {
+//     $alphabets = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+//     $numbers = "0123456789";
+//     $randomAlphabets = substr(str_shuffle($alphabets), 0, 2);
+//     $randomNumbers = substr(str_shuffle($numbers), 0, 4);
+//     $randomString = $randomAlphabets . $randomNumbers;
+//     return $randomString;
+//   }
 
   
 function errorShow($var)
@@ -40,3 +40,18 @@ function getStandardDateFormat($date)
     return $formattedDate;
 
 }
+
+
+function generateRandomString($length,$number=false) {
+    $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    if($number){
+        $characters='0123456789';
+    }
+    $charactersLength = strlen($characters);
+    $randomString = '';
+    for ($i = 0; $i < $length; $i++) {
+        $randomString .= $characters[rand(0, $charactersLength - 1)];
+    }
+    return $randomString;
+}
+
