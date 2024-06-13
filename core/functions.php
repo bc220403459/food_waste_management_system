@@ -15,3 +15,17 @@ function generateRandomString() {
     $randomString = $randomAlphabets . $randomNumbers;
     return $randomString;
   }
+
+  
+function errorShow($var)
+{
+    echo "<pre style='background-color:black; color:red; font-size:15pt; padding-top:6px; padding-bottom:6px; padding-left:4px'><strong><span style='font-style:none'>Error:</span></strong> ";
+    print_r($var);
+    exit;
+}
+
+
+function basePath()
+{
+    return __DIR__ . '/../';
+}

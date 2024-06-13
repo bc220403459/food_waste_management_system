@@ -13,6 +13,7 @@ if (isset($_POST['submit'])) {
         $_SESSION['password'] = $row['password'];
         $_SESSION['user_id'] = $row['user_id'];
         $_SESSION['gender']=$row['gender'];
+        $_SESSION['message']='';
         // if ($_SESSION['username']=='admin' && $_SESSION['password']='123'){
         //     header("location: ../views/admin_dashboard.php");
         // }

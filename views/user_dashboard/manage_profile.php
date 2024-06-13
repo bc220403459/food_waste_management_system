@@ -4,6 +4,9 @@ include ("../../config/connection.php");
 include ("../../includes/header.php");
 include ("../../includes/footer.php");
 $userID = $_SESSION['user_id'];
+// var_dump($_SESSION);
+// $id=$_GET['user_id'];
+// var_dump($id); exit;
 ?>
 <?php
 $getUser = "SELECT * FROM users WHERE user_id = $userID";
@@ -41,77 +44,56 @@ if (mysqli_num_rows($gotUser) > 0) {
       <div class="col-12 col-lg-9 col-xl-7">
         <div class="card shadow-2-strong card-registration" style="border-radius: 15px;">
           <div class="card-body p-4 p-md-5">
-            <h3 class="mb-4 pb-2 pb-md-0 mb-md-5 text-center">Sign up</h3>
+            <?php
+            if (isset($_SESSION['message'])){
+              echo $_SESSION['message'];
+              unset($_SESSION['message']);
+            }
+?>
+            <h3 class="mb-4 pb-2 pb-md-0 mb-md-5 text-center">Manage Profile</h3>
             <form action="../../backend/update_profile.php" method="post">
               <div class="row">
                 <div class="col mb-4">
                   <div data-mdb-input-init class="form-outline">
+                  <label for=""><strong>Username</strong></label>
                     <div class="input-group mb-2">
                       <div class="input-group-prepend">
                         <div class="input-group-text">@</div>
                       </div>
+                      <input type="hidden" name="user_id" id="user_id" value="<?php echo $rows['user_id'] ?>">
+                      
                       <input type="text" class="form-control" id="username" name="username" value="<?php echo $rows['username'] ?>">
                     </div>
-                    <!-- <input type="text" id="username" name="username" class="form-control form-control" placeholder="Username you want..." required /> -->
                   </div>
-
               </div>
-
               <div class="row">
                 <div class="col-md-6 mb-4">
-
                   <div data-mdb-input-init class="form-outline">
+                    <label for=""><strong>First Name</strong></label>
                     <input type="text" id="f_name" name="f_name" class="form-control form-control" value="<?php echo $rows['f_name'] ?>" />
-                    <!-- <label class="form-label" for="firstName">First Name</label> -->
                   </div>
-
                 </div>
                 <div class="col-md-6 mb-4">
-
-                  <div data-mdb-input-init class="form-outline">
+                  <div data-mdb-input-init class="form-outline" style="margin-left:4%">
+                  <label for=""><strong>Last Name</strong></label>
                     <input type="text" id="l_name" name="l_name" class="form-control form-control" value="<?php echo $rows['l_name'] ?>"  />
-                    <!-- <label class="form-label" for="lastName">Last Name</label> -->
                   </div>
-
                 </div>
               </div>
-
               <div class="row">
-                <div class="col-md-6 mb-4 d-flex align-items-center">
-
+                <!-- <div class="col-md-6 mb-4 d-flex align-items-center">
                   <div data-mdb-input-init class="form-outline datepicker w-100">
-                  <h6 class="mb-2 pb-1">Date of Birth: </h6>
-                    <input id="dob" name="dob" class="form-control" type="date"  value="<?php echo $rows['dob'] ?>"  />
+                  <h6 class="mb-2 pb-1"><strong>Date of Birth: </strong></h6>
+                    <input id="dob" name="dob" class="form-control" type="date"  value="<?php //echo $rows['dob'] ?>"  />
                   </div>
-
-                </div>
-                <div class="col-md-6 mb-4">
-                  <h6 class="mb-2 pb-1">Gender: </h6>
-                  <div class="form-check form-check-inline">
-                  <input type="radio" name="gender" value="Male" <?php if ($rows['gender'] == 'male') {
-                                                                    echo "checked";
-                                                                } ?>>Male
-                    <input type="radio" name="gender" value="Female" <?php if ($rows['gender'] == 'female') {
-                                                                        echo "checked";
-                                                                } ?>>Female
-                </div>
-                  <!-- <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="gender" id="maleGender" value="male"  />
-                    <label class="form-check-label" for="maleGender">Male</label>
-                  </div>
-                  <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="gender" id="femaleGender"
-                      value="female"  />
-                    <label class="form-check-label" for="femaleGender">Female</label>
-                  </div>
-
-
-                  <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="gender" id="otherGender"
-                      value="option3" />
-                    <label class="form-check-label" for="otherGender">Other</label>
-                  </div> -->
-
+                </div> -->
+                <!-- <div class="col-md-6 mb-4"> -->
+                  <!-- <h6 class="col-md-6 mb-2 pb-1">&nbsp;&nbsp;&nbsp;<strong>Gender: </strong></h6> -->
+                  <!-- <div class="form-check form-check-inline" style="margin-left:-10px"> -->
+                  <!-- <input type="radio" name="gender" value="Male" <?php //if ($rows['gender'] == 'male') { echo "checked"; } ?>>Male
+                  <input type="radio" name="gender" value="Female" <?php //if ($rows['gender'] == 'female') { echo "checked"; } ?>>Female -->
+                  <!-- </div> -->
+                <!-- </div> -->
                 </div>
               </div>
 
@@ -119,6 +101,7 @@ if (mysqli_num_rows($gotUser) > 0) {
                 <div class="col-md-6 mb-4 pb-2">
 
                   <div data-mdb-input-init class="form-outline">
+                  <label for=""><strong>Email Address</strong></label>
                     <input type="email" id="email" name="email" class="form-control form-control" value="<?php echo $rows['email'] ?>" />
                     <!-- <label class="form-label" for="emailAddress">Email</label> -->
                   </div>
@@ -127,6 +110,7 @@ if (mysqli_num_rows($gotUser) > 0) {
                 <div class="col-md-6 mb-4 pb-2">
 
                   <div data-mdb-input-init class="form-outline">
+                  <label for=""><strong>Password</strong></label>
                     <input type="password" id="password" name="password" class="form-control form-control" value="<?php echo $rows['password'] ?>" />
                   </div>
 
@@ -135,9 +119,35 @@ if (mysqli_num_rows($gotUser) > 0) {
 
               <div class="row">
                 <div class="col-md-6 mb-4 pb-2">
-                <h6 class="">Dietary Preferences </h6>
-                  <select class="select form-control" name="dietary_preference" value="<?php echo $rows['dietary_preference'] ?>" required>
-                    <option value="none" selected>None</option>
+                <h6 class=""><strong>Dietary Preferences </strong></h6>
+                  <select class="select form-control" name="dietary_preference" value="" >
+                    <option value="<?php echo $rows['dietary_preference'] ?>" selected>
+                    <?php
+                    switch ($rows['dietary_preference']) {
+                      case 'vegan':
+                        echo "Vegan";
+                        break;
+                      case 'vegetarian':
+                        echo "Vegetarian";
+                        break;
+                      case 'gluten_free':
+                        echo "Gluten Free";
+                        break;
+                      case 'dairy_free':
+                        echo "Dairy Free";
+                        break;
+                      case 'low_carb';
+                        echo "Low Carb";
+                        break;
+                      case 'ketogenic':
+                        echo "Ketogenic";
+                        break;
+                      default:
+                        echo '';
+                        break;
+                    }
+                    ?>
+                    </option>
                     <option value="vegan">Vegan</option>
                     <option value="vegetarian">Vegetarian</option>
                     <option value="gluten_free">Gluten Free</option>
@@ -150,9 +160,30 @@ if (mysqli_num_rows($gotUser) > 0) {
                 </div>
 
                 <div class="col-md-6 mb-4 pb-2">
-                <h6 class="">Allergy (if any) </h6>
-                  <select class="select form-control" name="allergy_info" value="<?php echo $rows['allergy_info']?>" required>
-                    <option value="none">None</option>
+                <h6 class=""><strong>Allergy (if any) </strong></h6>
+                  <select class="select form-control" name="allergy_info" value="" >
+                    <option value="<?php echo $rows['allergy_info'] ?>">
+                    <?php 
+                    switch($rows['allergy_info']){
+                      case 'egg_allergy':
+                        echo "Egg Allery";
+                        break;
+                      case 'lactose_intolerance':
+                        echo "Lactose Intolerence";
+                        break;
+                      case 'wheat_allergy':
+                        echo "Wheat Allergy";
+                        break;
+                      case 'soy_allergy':
+                        echo "Soy Allergy";
+                        break;
+                      default:
+                        echo '';
+                        break;
+                    }
+                    // echo $rows['allergy_info'] 
+                    ?>
+                  </option>
                     <option value="egg_allergy">Egg Allergy</option>
                     <option value="lactose_intolerance">Lactose Intolerance</option>
                     <option value="wheat_allergy">Wheat allergy</option>
@@ -165,7 +196,7 @@ if (mysqli_num_rows($gotUser) > 0) {
               </div>
 
               <div class="mt-4 pt-2 text-center">
-                <input data-mdb-ripple-init class="btn btn-primary btn-lg" type="submit" value="Update" name="update" />
+                <input data-mdb-ripple-init class="btn btn-primary btn-lg" type="submit" name="update" value="update"/>
               </div>
 <?php
  

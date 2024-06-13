@@ -104,11 +104,11 @@
                   </div>
 
 
-                  <div class="form-check form-check-inline">
+                  <!-- <div class="form-check form-check-inline">
                     <input class="form-check-input" type="radio" name="gender" id="otherGender"
                       value="option3" />
-                    <label class="form-check-label" for="otherGender">Other</label>
-                  </div>
+                    <label class="form-check-label" for="otherGender">Other</label> 
+                  </div>-->
 
                 </div>
               </div>
