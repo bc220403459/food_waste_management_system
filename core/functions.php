@@ -1,13 +1,15 @@
 <?php
 
-function dd($data){
+function dd($data)
+{
     echo "<pre style='background-color:black; color:yellow'>";
     var_dump($data);
     echo "</pre>";
     exit;
 }
 
-function generateRandomString() {
+function generateRandomString()
+{
     $alphabets = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     $numbers = "0123456789";
     $randomAlphabets = substr(str_shuffle($alphabets), 0, 2);
@@ -28,4 +30,13 @@ function errorShow($var)
 function basePath()
 {
     return __DIR__ . '/../';
+}
+
+function getStandardDateFormat($date)
+{
+    $dateString = $date;
+    $date = new DateTime($dateString);
+    $formattedDate = $date->format('d-M-Y');
+    return $formattedDate;
+
 }

@@ -72,13 +72,20 @@ body {
         <div class="row justify-content-center align-items-center h-75">
             <div class="col-12 col-lg-9 col-xl-7">
                 <div class="card shadow-2-strong card-registration" style="border-radius: 15px;">
-                    <div class="card-body p-4 p-md-5">
-                        <h3 class="mb-4 pb-2 pb-md-0 mb-md-5 text-center">Add Inventory</h3>
-                        <div class="text-end mt-1 mb-3">
+                <?php 
+                        if (isset($_SESSION['message'])) {
+                            echo $_SESSION['message'];
+                            unset($_SESSION['message']);
+                        } ?>
+                <div class="text-end mt-4 mb-0">
                             <button class="btn btn-sm btn-dark">
-                                <a href="view_inventory.php" class="link">View Available Inventory</a>
-                            </button>
+                                <a href="view_inventory.php" class="link" style="font-style:italic">View Available Inventory </a>
+                            </button>&nbsp;&nbsp;
                         </div>
+                    <div class="card-body p-4 p-md-5">
+
+                        <h3 class="mb-4 text-center" style="margin-top:-5%">Add Inventory</h3>
+                       
                         <form action="../../backend/add_inventory.php" method="post">
                             <div class="row">
                                 <div class="col-12 mb-4">
@@ -97,14 +104,14 @@ body {
 
                                     <div data-mdb-input-init class="form-outline">
                                         <input type="text" id="item_name" name="item_name"
-                                            class="form-control form-control" placeholder="Food item name..."  />
+                                            class="form-control form-control" placeholder="Food item name..."  required/>
                                     </div>
 
                                 </div>
                                 <div class="col-md-6 mb-4">
                                     <div data-mdb-input-init class="form-outline">
                                         <input type="number" id="quantity" name="quantity"
-                                            class="form-control form-control" placeholder="Quantity..."  />
+                                            class="form-control form-control" placeholder="Quantity..."  required/>
                                     </div>
                                 </div>
                             </div>
@@ -112,16 +119,16 @@ body {
                             <div class="row">
                                 <div class="col-md-6 mb-4 d-flex align-items-center">
                                     <div data-mdb-input-init class="form-outline datepicker w-100">
-                                        <h6 class="mb-2 pb-1">Expiry Date: </h6>
+                                        <h6 class="mb-2 pb-1"><strong>Expiry Date: </strong></h6>
                                         <!-- <input id="expiry_date" name="expiry_date" class="form-control" type="date"
-                                            placeholder="Enter expiry date..."  /> -->
-                                            <input id="expiry_date" name="expiry_date" class="form-control" type="date" placeholder="Enter expiry date..." />
+                                            placeholder="Enter expiry date..."  required/> -->
+                                            <input id="expiry_date" name="expiry_date" class="form-control" type="date" placeholder="Enter expiry date..." required/>
                                     </div>
 
                                 </div>
                                 <div class="col-md-6 mb-4">
-                                    <h6 class="">Storage Location </h6>
-                                    <select class="select form-control" name="storage_location" >
+                                    <h6 class=""><strong>Storage Location</strong> </h6>
+                                    <select class="select form-control" name="storage_location" required>
                                         <option selected>Select storage branch...</option>
                                         <option value="rwp_branch">Rawalpindi Branch</option>
                                         <option value="lhr_branch">Lahore Branch</option>
@@ -130,12 +137,12 @@ body {
                                     </select>
                                 </div>
                             </div>
-                            <div class="mt-4 pt-2 text-center">
-                                <input data-mdb-ripple-init class="btn btn-outline-info btn-lg" type="submit"
+                            <div class="mt-3 pt-2 text-center">
+                                <input data-mdb-ripple-init class="btn btn-outline-info btn-lg" name="add_inventory" type="submit"
                                     value="Add item" />
                             </div>
                         </form>
-                        <div class="mt-2 mb-3 text-end">
+                        <div class="mt-4 mb-0 text-end">
                             <button class="btn btn-outline-primary">
                                 <i class="bi bi-qr-code-scan"></i> Add item using QR code
                             </button>
