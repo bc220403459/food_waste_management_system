@@ -1,0 +1,2 @@
+Complete Final Application is mandatory.
+It should contain: source code/database script/anyother related file

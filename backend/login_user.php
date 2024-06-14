@@ -13,6 +13,8 @@ if (isset($_POST['submit'])) {
         $_SESSION['password'] = $row['password'];
         $_SESSION['user_id'] = $row['user_id'];
         $_SESSION['gender']=$row['gender'];
+        $_SESSION['dietary_preference']=$row['dietary_preference'];
+        $_SESSION['allergy_info']=$row['allergy_info'];
         $_SESSION['message']='';
 
         // $_SESSION['message']='';

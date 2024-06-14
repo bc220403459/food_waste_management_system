@@ -3,7 +3,7 @@ session_start();
 include("../../includes/header.php");
 include("../../includes/footer.php");
 include("../../config/connection.php");
-include("../../core/functions.php");
+require("../../core/functions.php");
 ?>
 <h1 class="text-center mt-5">Inventory Management</h1>
 
