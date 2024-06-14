@@ -91,6 +91,7 @@ body {
                             ?>
                             <div class="row">
                                 <div class="col-12 mb-4">
+                                <input type="hidden" name="item_id" value="<?php echo $result['item_id']; ?>" />
                                     <?php 
                                     $sku=generateRandomString(11,true);
                                     ?>
@@ -132,12 +133,12 @@ body {
                                 </div>
                                 <div class="col-md-6 mb-4">
                                     <h6 class=""><strong>Storage Location</strong> </h6>
-                                    <select class="select form-control" name="storage_location" >
+                                    <select class="select form-control" name="storage_location">
                                         <option  value="<?php echo $result['storage_location'] ?>" selected>
                                             <?php                                            
                                                 switch($result['storage_location']){
                                                     case 'rwp_branch':
-                                                        echo "Rawawpindi Branch";
+                                                        echo "Rawalpindi Branch";
                                                         break;
                                                     case 'lhr_branch':
                                                         echo "Lahore Branch";
@@ -161,16 +162,16 @@ body {
                                 </div>
                             </div>
                             <div class="mt-3 pt-2 text-center">
-                                <form action="../../backend/update_item.php" method="post">
+                                <!-- <form action="../../backend/update_item.php" method="post"> -->
                                     <button class="btn btn-outline-primary" name="update_item" type="submit" value="Update Item">
-                                        Update Item
+                                       Update Item
                                     </button>
-                                </form>
+                                <!-- </form> -->
 
 
                                 <!-- <form action="../../backend/update_item.php">
                                 <button class="btn btn-outline-primary" name="update_item" type="submit" value="Update Item">
-                                    <a href="../../backend/update_item.php?id=<?php echo $result['item_id'] ?>" type="submit">
+                                    <a href="../../backend/update_item.php?id=<?php //echo $result['item_id'] ?>" type="submit">
                                         Update Item
                                     </a>    
                                 </button>
