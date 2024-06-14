@@ -41,6 +41,7 @@ include("../../core/functions.php");
         color: white;
         text-decoration: none;
     }
+    a{color:white; text-decoration:none}
 </style>
 </head>
 <section class="vh-100 gradient-custom">
@@ -59,10 +60,12 @@ include("../../core/functions.php");
                         <div class="mt-3">
                             <table class="table table-striped">
                                 <tr>
+                                    <!-- <th>Item ID</th> -->
                                     <th>SKU</th>
                                     <th>Item Name</th>
                                     <th>Available Stock</th>
                                     <th>Expiry Date</th>
+                                    <!-- <th>Storage Location <br>(Branch)</th> -->
                                     <th>Actions</th>
                                 </tr>
                                 <?php
@@ -72,18 +75,44 @@ include("../../core/functions.php");
                                     while ($row = mysqli_fetch_assoc($allFoodItems)) {
                                 ?>
                                         <tr>
+                                            <!-- <td> -->
+                                                <?php $item_id= $row['item_id'] ?>
+                                            <!-- </td> -->
                                             <td><?php echo $row['sku'] ?></td>
                                             <?php //echo $row['user_id'] ?>
                                             <td><?php echo $row['item_name'] ?></td>
                                             <td class="text-center"><?php echo $row['quantity'] ?></td>
                                             <td><?php echo getStandardDateFormat($row['expiry_date']) ?></td>
+                                            <!-- <td> -->
+                                                <?php
+                                                // switch($row['storage_location']){
+                                                //     case 'rwp_branch':
+                                                //         echo "Rawawpindi ";
+                                                //         break;
+                                                //     case 'lhr_branch':
+                                                //         echo "Lahore ";
+                                                //         break;
+                                                //     case 'mtn_branch':
+                                                //         echo "Multan ";
+                                                //         break;
+                                                //     case 'khi_branch':
+                                                //         echo "Karachi";
+                                                //         break;
+                                                //     default:
+                                                //         echo '';
+                                                //         break;                                                }
+                                                ?>
+                                            <!-- </td> -->
                                             <td>
                                                 <button class="btn btn-sm btn-primary">
-                                                    <i class="bi bi-pencil-square"></i>
+                                                    <form action="update_item.php?>id=<?php echo $item_id?>">
+                                                    <a href="update_item.php?id=<?php echo $item_id ?>"><i class="bi bi-pencil-square"></i></a>
+                                                    </form>
                                                 </button>
-                                                <button class="btn btn-sm btn-danger">
-                                                    <form action="../../backend/delete_item.php" method="post"></form>
-                                                        <a href="../../backend/delete_item.php?id=<?php echo $row['item_id'] ?>"><i class="bi bi-trash"></i></a>
+                                                <button class="btn btn-sm btn-danger del_item">
+                                                    <form action="../../backend/delete_item.php" method="post">
+                                                        <a href="../../backend/delete_item.php?id=<?php echo $item_id ?>"><i class="bi bi-trash"></i></a>
+                                                        </form>
                                                     </button>
                                                 </button>
                                             </td>
@@ -91,7 +120,7 @@ include("../../core/functions.php");
                                 <?php
                                     }
                                 } else {
-                                    echo "no record";
+                                    // echo "no record";
                                 }
                                 ?>
                                 <!-- <tr>
@@ -109,6 +138,13 @@ include("../../core/functions.php");
                                     </td>
                                 </tr> -->
                             </table>
+                            <div class="text-end mt-4 mb-1">
+                                <button class="btn btn-danger btn-sm del_all">
+                                    <a href="../../backend/delete_all_items.php">
+                                    <i class="bi bi-trash"></i>Delete All
+                                    </a>
+                                </button>
+                            </div>
                         </div>
                         
                     </div>
@@ -117,3 +153,19 @@ include("../../core/functions.php");
         </div>
     </div>
 </section>
+
+<script>
+  const deleteAllButton = document.querySelector('.del_all');
+  deleteAllButton.addEventListener('click', function(event) {
+    if (!confirm("Are you sure you want to delete all items? This action cannot be undone.")) {
+      event.preventDefault();
+    }
+  });
+
+  const deleteItemButton =document.querySelector('.del_item');
+  deleteItemButton.addEventListener('click',function (event){
+    if (!confirm("Are you sure?")){
+        event.preventDefault();
+    }
+  });
+</script>
