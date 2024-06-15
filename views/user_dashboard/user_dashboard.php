@@ -4,63 +4,90 @@ include ("../../config/connection.php");
 include ("../../includes/header.php");
 include ("../../includes/footer.php");
 include ("../../core/functions.php");
-// var_dump($_SESSION); exit; 
 if (!isset($_SESSION['username']))
 {
     header("location:../../pages/sign-in.php");
 }
-// var_dump($_SESSION); exit;
 ?>
 <style>
   .dropdown-item-no-padding { 
     margin-right:-20px;
   }
   .expiryReminder .modal-dialog {
-            max-width: 750px; /* Set the width */
-        }
-        .expiryReminder .modal-content {
-            height: 550px; /* Set the height */
-        }
+    max-width: 750px; 
+  }
+  .expiryReminder .modal-content {
+    height: 550px; 
+  }
+  .expiryButton{
+    margin-top:4.5px !important;
+    margin-left:12px !important; 
+  } 
+  .tipsButton{
+    margin-top:4.5px !important;
+    margin-left:12px !important; 
+    margin-right:20px !important;
+  }
+  .shake {
+  animation: shake 2s infinite cubic-bezier(0.215, 0.61, 0.355, 1) both;
+}
+
+@keyframes shake {
+  0% { transform: translateX(0); }
+  20%, 60% { transform: translateX(-5px); }
+  40%, 80% { transform: translateX(10px); }
+}
+
 </style>
+<?php 
+  $toExpire=getExpiringFoodItems();
+  $emptyCheck=empty($toExpire);
+  ?>
 <h1>Dashboard</h1>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top d-flex justify-content-between" style="margin-bottom:10px !important">
     <div class="container-fluid">
-     
-      <a class="navbar-brand" href="../views/user_dashboard/user_dashboard.php"><em><strong> <img src="../../images/favicon.ico" alt="" style="height:30px; width:30px"> Food Waste Management System</strong></em></a>
+      <a class="navbar-brand" href="user_dashboard.php"><em><strong> <img src="../../images/favicon.ico" alt="" style="height:30px; width:30px"> Food Waste Management System</strong></em></a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-
       <ul class="navbar-nav" style="margin-left:26% !important">
         <li class="nav-item">
-          <a class="nav-link " aria-current="page" href="#">Home</a>
+          <a class="nav-link " aria-current="page" href="user_dashboard.php">Home</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="view_inventory.php">Inventory</a>
         </li>
         <li class="nav-item">
-          
-          <button type="button" class="btn btn-sm btn-outline-danger" data-toggle="modal" data-target="#expiryReminder">
-        <i class="bi bi-bell"></i> Expiry Reminder
+          <a class="nav-link" href="feedback.php">Feedback</a>
+        </li>
+        <li class="nav-item">
+            <button class="btn btn-outline-primary btn-sm tipsButton"><i class="bi bi-lightbulb-fill"></i> Storage Tips</button>
+        </li>
+        <li class="nav-item">
+          <?php if (!$emptyCheck){
+            ?>
+          <button type="button" class="btn btn-sm btn-outline-danger expiryButton shake" data-toggle="modal" data-target="#expiryReminder">
+          <i class="bi bi-bell"></i> Expiry Reminder
+          <?php
+          }
+          else{
+          ?>
+          <button type="button" class="btn btn-sm btn-outline-danger expiryButton" data-toggle="modal" data-target="#expiryReminder">
+          <i class="bi bi-bell"></i> Expiry Reminder
+          <?php
+          }
+          ?>
     </button>
-          <!--Expiry Reminder-->        </li>
+       </li>
       </ul>
-
       <div class="collapse navbar-collapse" id="navbarNavDropdown">
         <ul class="navbar-nav ms-auto">
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               <img src="../../images/user.jpg" alt="User Avatar" width="40px" height="34px" class="rounded-circle">&nbsp;&nbsp; <?php echo $_SESSION['username'] ?>
             </a>
-            <!-- <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
-              <li><a class="dropdown-item" href="#">Profile</a></li>
-              <li><a class="dropdown-item" href="#">Settings</a></li>
-              <li><hr class="dropdown-divider"></li>
-              <li class="btn btn-danger"><a class="dropdown-item " href="#">Logout</a></li>
-            </ul> -->
             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
               <li><a class="dropdown-item dropdown-item-no-padding" href="manage_profile.php">Profile</a></li>
-              <!-- <li><a class="dropdown-item dropdown-item-no-padding" href="#">Settings</a></li> -->
               <li><hr class="dropdown-divider"></li>
               <li><a class="dropdown-item dropdown-item-no-padding text-danger" href="../../backend/logout.php">Logout</a></li>
             </ul>
@@ -69,23 +96,15 @@ if (!isset($_SESSION['username']))
       </div>
     </div>
   </nav><br/>
-
-
-
+  
 <div class="expiryReminder">
-  <!-- Button trigger modal -->
-  <!-- <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#expiryReminder">
-        <i class="bi bi-bell"></i>
-    </button> -->
-
-    <!-- Modal -->
     <div class="modal fade" id="expiryReminder" tabindex="-1" aria-labelledby="expiryReminderLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
                     <h4 class="modal-title" id="expiryReminderLabel">Expiry Reminders</h5>
-                    <div class="text-end" style="margin-left:60% !important">
-                    <button type="button " class="close" data-dismiss="modal" aria-label="Close">
+                    <div class="text-end" style="margin-left:auto !important">
+                    <button type="button btn-outline-danger" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                     </div>
@@ -100,7 +119,6 @@ if (!isset($_SESSION['username']))
                           <th>Days Remaining</th>
                           <th>Storage Location</th>
                         </tr>
-
                         <?php 
                         $expiringFoodItems = getExpiringFoodItems();
                         if (!empty($expiringFoodItems)) {
@@ -109,22 +127,22 @@ if (!isset($_SESSION['username']))
                         <tr>
                           <td align="left"><?php echo $item['item_name'] ?></td>
                           <td><?php echo $item['quantity'] ?> </td>
-                          <td><?php echo $item['expiry_date'] ?></td>
+                          <td><?php echo getStandardDateFormat($item['expiry_date']) ?></td>
                           <td><?php echo calculateDaysUntilExpiry($item['expiry_date']) ?></td>
                           <td>
                             <?php 
                              switch($item['storage_location']){
                               case 'rwp_branch':
-                                  echo "Rawalpindi ";
+                                  echo "Rawalpindi Branch";
                                   break;
                               case 'lhr_branch':
-                                  echo "Lahore ";
+                                  echo "Lahore Branch";
                                   break;
                               case 'mtn_branch':
-                                  echo "Multan ";
+                                  echo "Multan Branch";
                                   break;
                               case 'khi_branch':
-                                  echo "Karachi";
+                                  echo "Karachi Branch";
                                   break;
                               default:
                                   echo '';
@@ -135,7 +153,7 @@ if (!isset($_SESSION['username']))
                         <?php
                           }
                     } else {
-                        echo "No food items found expiring in three days.\n";
+                        echo "No food items found expiring in coming three days.\n";
                     }
                     ?>
                       </table>
@@ -147,14 +165,13 @@ if (!isset($_SESSION['username']))
             </div>
         </div>
     </div>
-
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     </button>
   </div>
   <p>
-    <?php //dd($_SESSION); 
+    <?php 
     $deitaryPreference=$_SESSION['dietary_preference'];
     $alleryInfo=$_SESSION['allergy_info'];
     $test=getExpiringFoodItems();

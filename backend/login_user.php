@@ -2,7 +2,6 @@
 session_start();
 include("../config/connection.php");
 if (isset($_POST['submit'])) {
-    // $email = mysqli_real_escape_string($connect, $_POST['email']);
     $username = mysqli_real_escape_string($connect, $_POST['username']);
     $password = mysqli_real_escape_string($connect, $_POST['password']);
     $sql = "SELECT * FROM users WHERE username='$username' AND `password`='$password' ";
@@ -16,14 +15,7 @@ if (isset($_POST['submit'])) {
         $_SESSION['dietary_preference']=$row['dietary_preference'];
         $_SESSION['allergy_info']=$row['allergy_info'];
         $_SESSION['message']='';
-
-        // $_SESSION['message']='';
-        // if ($_SESSION['username']=='admin' && $_SESSION['password']='123'){
-        //     header("location: ../views/admin_dashboard.php");
-        // }
-        // else{
-            header("location: ../views/user_dashboard/user_dashboard.php");
-        // }
+        header("location: ../views/user_dashboard/user_dashboard.php");
     } else {
         echo "<script>alert('Invalid Credentials');";
         echo "setTimeout(function() {window.location.href='../pages/sign-in.php';}, 1) </script>";

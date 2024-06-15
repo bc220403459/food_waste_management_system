@@ -1,13 +1,8 @@
 <?php
 session_start();
-include ("../../includes/header.php");
-include ("../../includes/footer.php");
-include ("../../config/connection.php");
-include ("../../core/functions.php");
-include ("navbar.php");
-
+include("../../includes/header.php");
+include("navbar.php");
 ?>
-<link rel="icon" type="image/x-icon" href="../../images/favicon.ico">
 <style>
 body {
     background-color: #F1ECE7;
@@ -67,9 +62,9 @@ body {
     color: white
 }
 </style>
-<h1 class="text-center mt-5">Inventory Management</h1>
+
 <section class="vh-100 gradient-custom">
-    <div class="container py-5 h-100">
+    <div class="container py-5 h-25">
         <div class="row justify-content-center align-items-center h-75">
             <div class="col-12 col-lg-9 col-xl-7">
                 <div class="card shadow-2-strong card-registration" style="border-radius: 15px;">
@@ -78,57 +73,60 @@ body {
                             echo $_SESSION['message'];
                             unset($_SESSION['message']);
                         } ?>
-                <div class="text-end mt-4 mb-0">
-                            <button class="btn btn-sm btn-dark">
-                                <a href="view_inventory.php" class="link" style="font-style:italic">View Available Inventory </a>
-                            </button>&nbsp;&nbsp;
-                        </div>
+              
                     <div class="card-body p-4 p-md-5">
 
-                        <h3 class="mb-4 text-center" style="margin-top:-5%">Add Inventory</h3>
-                       
-                        <form action="../../backend/add_inventory.php" method="post">
+                        <!-- <h3 class="mb-4 text-center" style="margin-top:-5%">Add Inventory</h3> -->
+                        <h1 class="text-center mt-2 mb-5">Feedback</h1>         
+                        <form action="../../backend/add_feedback.php" method="post">
                             <div class="row">
                                 <div class="col-12 mb-4">
-                                    <?php 
-                                    $sku=generateRandomString(11,true);
-                                    ?>
-                                    <div class="input-group mb-1">
+                                   
+                                    <!-- <div class="input-group mb-1">
                                         <span class="input-group-text" id="basic-addon1">#</span>
-                                        <!-- <label for=""><strong>SKU</strong></label> -->
+                                         <label for=""><strong>SKU</strong></label> 
                                         <input type="text" id="sku" name="sku" class="form-control form-control"
                                             style="font-style:italic"
                                             placeholder="Item ID (this will be automatically generated)..."
-                                            value="<?php echo $sku ?>"  />
-                                    </div>
+                                            value="<?php //echo $sku ?>"  />
+                                    </div> -->
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-6 mb-4">
 
                                     <div data-mdb-input-init class="form-outline">
-                                        <input type="text" id="item_name" name="item_name"
-                                            class="form-control form-control" placeholder="Food item name..."  required/>
+                                        <!-- <input type="text" id="item_name" name="item_name"
+                                            class="form-control form-control" placeholder="Feedback Type"  required/> -->
+                                            <!-- <h6 class=""><strong>Storage Location</strong> </h6> -->
+                                    <select class="select form-control" name="feedback_type" required>
+                                        <option selected>Select feedback type...</option>
+                                        <option value="recipe_suggestions">Recipe Suggestions</option>
+                                        <option value="storage_tips">Storage Tips</option>
+                                        <option value="overall_ux">Overall User Experience</option>
+                                    </select>
                                     </div>
 
                                 </div>
                                 <div class="col-md-6 mb-4">
                                     <div data-mdb-input-init class="form-outline">
-                                        <input type="number" id="quantity" name="quantity"
-                                            class="form-control form-control" placeholder="Quantity..."  required/>
+                                        <input type="number" id="rating" name="rating"
+                                            class="form-control form-control" placeholder="Rating" min="1" max="10" required/>
                                     </div>
                                 </div>
                             </div>
 
                             <div class="row">
-                                <div class="col-md-6 mb-4 d-flex align-items-center">
+                                <div class="col mb-4 d-flex align-items-center">
                                     <div data-mdb-input-init class="form-outline datepicker w-100">
-                                        <h6 class="mb-2 pb-1"><strong>Expiry Date: </strong></h6>
-                                            <input id="expiry_date" name="expiry_date" class="form-control" type="date" placeholder="Enter expiry date..." required/>
+                                        <h6 class="mb-2 pb-1"><strong>Feedback: </strong></h6>
+                                            <div class="form-group">
+                                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="5" cols="5" name="comment"></textarea>
+                                            </div>
                                     </div>
 
                                 </div>
-                                <div class="col-md-6 mb-4">
+                                <!-- <div class="col-md-6 mb-4">
                                     <h6 class=""><strong>Storage Location</strong> </h6>
                                     <select class="select form-control" name="storage_location" required>
                                         <option selected>Select storage branch...</option>
@@ -137,18 +135,13 @@ body {
                                         <option value="mtn_branch">Multan Branch</option>
                                         <option value="khi_branch">Karachi Branch</option>
                                     </select>
-                                </div>
+                                </div> -->
                             </div>
                             <div class="mt-3 pt-2 text-center">
                                 <input data-mdb-ripple-init class="btn btn-outline-info btn-lg" name="add_inventory" type="submit"
                                     value="Add item" />
                             </div>
                         </form>
-                        <div class="mt-4 mb-0 text-end">
-                            <button class="btn btn-outline-primary">
-                                <i class="bi bi-qr-code-scan"></i> Add item using QR code
-                            </button>
-                        </div>
                         </form>
                     </div>
                 </div>

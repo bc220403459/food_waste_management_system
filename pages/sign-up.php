@@ -50,87 +50,53 @@
                       </div>
                       <input type="text" class="form-control" id="username" name="username" placeholder="Username you want...">
                     </div>
-                    <!-- <input type="text" id="username" name="username" class="form-control form-control" placeholder="Username you want..." required /> -->
                   </div>
-
               </div>
-
               <div class="row">
                 <div class="col-md-6 mb-4">
-
                   <div data-mdb-input-init class="form-outline">
                     <input type="text" id="f_name" name="f_name" class="form-control form-control" placeholder="Enter your first name..." required />
-                    <!-- <label class="form-label" for="firstName">First Name</label> -->
                   </div>
-
                 </div>
                 <div class="col-md-6 mb-4">
-
                   <div data-mdb-input-init class="form-outline">
                     <input type="text" id="l_name" name="l_name" class="form-control form-control" placeholder="Enter your last name..." required />
-                    <!-- <label class="form-label" for="lastName">Last Name</label> -->
                   </div>
-
                 </div>
               </div>
-
               <div class="row">
                 <div class="col-md-6 mb-4 d-flex align-items-center">
-
                   <div data-mdb-input-init class="form-outline datepicker w-100">
                   <h6 class="mb-2 pb-1">Date of Birth: </h6>
                     <input id="dob" name="dob" class="form-control" type="date" placeholder="Enter date of birth..." required />
-                    <!-- <input type="text" class="form-control form-control-lg" id="birthdayDate" />
-                    <label for="birthdayDate" class="form-label">Birthday</label> -->
                   </div>
-
                 </div>
                 <div class="col-md-6 mb-4">
-
                   <h6 class="mb-2 pb-1">Gender: </h6>
-
-                  
                   <div class="form-check form-check-inline">
                     <input class="form-check-input" type="radio" name="gender" id="maleGender"
                       value="male"  />
                     <label class="form-check-label" for="maleGender">Male</label>
                   </div>
-
-
                   <div class="form-check form-check-inline">
                     <input class="form-check-input" type="radio" name="gender" id="femaleGender"
                       value="female"  />
                     <label class="form-check-label" for="femaleGender">Female</label>
                   </div>
-
-
-                  <!-- <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="gender" id="otherGender"
-                      value="option3" />
-                    <label class="form-check-label" for="otherGender">Other</label> 
-                  </div>-->
-
                 </div>
               </div>
-
               <div class="row">
                 <div class="col-md-6 mb-4 pb-2">
-
                   <div data-mdb-input-init class="form-outline">
                     <input type="email" id="email" name="email" class="form-control form-control" placeholder="Enter email address" required/>
-                    <!-- <label class="form-label" for="emailAddress">Email</label> -->
                   </div>
-
                 </div>
                 <div class="col-md-6 mb-4 pb-2">
-
                   <div data-mdb-input-init class="form-outline">
                     <input type="password" id="password" name="password" class="form-control form-control" placeholder="Enter password"  required/>
                   </div>
-
                 </div>
               </div>
-
               <div class="row">
                 <div class="col-md-6 mb-4 pb-2">
                 <h6 class="">Dietary Preferences </h6>
@@ -143,10 +109,7 @@
                     <option value="low_carb">Low Carb</option>
                     <option value="ketogenic">Ketogenic</option>
                   </select>
-                  <!-- <label class="form-label select-label">Choose option</label> -->
-
                 </div>
-
                 <div class="col-md-6 mb-4 pb-2">
                 <h6 class="">Allergy (if any) </h6>
                   <select class="select form-control" name="allergy_info" required>
@@ -156,16 +119,11 @@
                     <option value="wheat_allergy">Wheat allergy</option>
                     <option value="soy_allergy">Soy allergy</option>
                   </select>
-                  <!-- <label class="form-label select-label">Choose option</label> -->
-
                 </div>
-
               </div>
-
               <div class="mt-4 pt-2 text-center">
                 <input data-mdb-ripple-init class="btn btn-primary btn-lg" type="submit" value="Sign up" />
               </div>
-
             </form>
           </div>
         </div>

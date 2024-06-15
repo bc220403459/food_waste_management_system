@@ -54,9 +54,6 @@ if (isset($_SESSION['username'])) {
                         <div class="text-center">
                             <input type="submit" class="btn btn-success btn-lg" name="submit" value="Login"
                                 style="padding-left: 2.5rem; padding-right: 2.5rem;">
-                            <!-- <button type="button" data-mdb-button-init data-mdb-ripple-init
-                                class="btn btn-success btn-lg"
-                                >Login</button> -->
                         </div>
                 </form>
                 <p class="small fw-bold mt-2 pt-1 mb-0">Don't have an account? <a href="sign-up.php"

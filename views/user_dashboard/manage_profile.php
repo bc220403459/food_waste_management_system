@@ -3,10 +3,8 @@ session_start();
 include ("../../config/connection.php");
 include ("../../includes/header.php");
 include ("../../includes/footer.php");
+include ("navbar.php");
 $userID = $_SESSION['user_id'];
-// var_dump($_SESSION);
-// $id=$_GET['user_id'];
-// var_dump($id); exit;
 ?>
 <?php
 $getUser = "SELECT * FROM users WHERE user_id = $userID";
@@ -40,7 +38,7 @@ if (mysqli_num_rows($gotUser) > 0) {
 
 <section class="vh-100 gradient-custom">
   <div class="container py-5 h-100">
-    <div class="row justify-content-center align-items-center h-100">
+    <div class="row justify-content-center align-items-center h-25">
       <div class="col-12 col-lg-9 col-xl-7">
         <div class="card shadow-2-strong card-registration" style="border-radius: 15px;">
           <div class="card-body p-4 p-md-5">
@@ -81,19 +79,7 @@ if (mysqli_num_rows($gotUser) > 0) {
                 </div>
               </div>
               <div class="row">
-                <!-- <div class="col-md-6 mb-4 d-flex align-items-center">
-                  <div data-mdb-input-init class="form-outline datepicker w-100">
-                  <h6 class="mb-2 pb-1"><strong>Date of Birth: </strong></h6>
-                    <input id="dob" name="dob" class="form-control" type="date"  value="<?php //echo $rows['dob'] ?>"  />
-                  </div>
-                </div> -->
-                <!-- <div class="col-md-6 mb-4"> -->
-                  <!-- <h6 class="col-md-6 mb-2 pb-1">&nbsp;&nbsp;&nbsp;<strong>Gender: </strong></h6> -->
-                  <!-- <div class="form-check form-check-inline" style="margin-left:-10px"> -->
-                  <!-- <input type="radio" name="gender" value="Male" <?php //if ($rows['gender'] == 'male') { echo "checked"; } ?>>Male
-                  <input type="radio" name="gender" value="Female" <?php //if ($rows['gender'] == 'female') { echo "checked"; } ?>>Female -->
-                  <!-- </div> -->
-                <!-- </div> -->
+               
                 </div>
               </div>
 
@@ -103,7 +89,6 @@ if (mysqli_num_rows($gotUser) > 0) {
                   <div data-mdb-input-init class="form-outline">
                   <label for=""><strong>Email Address</strong></label>
                     <input type="email" id="email" name="email" class="form-control form-control" value="<?php echo $rows['email'] ?>" />
-                    <!-- <label class="form-label" for="emailAddress">Email</label> -->
                   </div>
 
                 </div>
@@ -113,10 +98,8 @@ if (mysqli_num_rows($gotUser) > 0) {
                   <label for=""><strong>Password</strong></label>
                     <input type="password" id="password" name="password" class="form-control form-control" value="<?php echo $rows['password'] ?>" />
                   </div>
-
                 </div>
               </div>
-
               <div class="row">
                 <div class="col-md-6 mb-4 pb-2">
                 <h6 class=""><strong>Dietary Preferences </strong></h6>
@@ -155,10 +138,7 @@ if (mysqli_num_rows($gotUser) > 0) {
                     <option value="low_carb">Low Carb</option>
                     <option value="ketogenic">Ketogenic</option>
                   </select>
-                  <!-- <label class="form-label select-label">Choose option</label> -->
-
                 </div>
-
                 <div class="col-md-6 mb-4 pb-2">
                 <h6 class=""><strong>Allergy (if any) </strong></h6>
                   <select class="select form-control" name="allergy_info" value="" >
@@ -181,7 +161,6 @@ if (mysqli_num_rows($gotUser) > 0) {
                         echo '';
                         break;
                     }
-                    // echo $rows['allergy_info'] 
                     ?>
                   </option>
                     <option value="egg_allergy">Egg Allergy</option>
@@ -189,12 +168,8 @@ if (mysqli_num_rows($gotUser) > 0) {
                     <option value="wheat_allergy">Wheat allergy</option>
                     <option value="soy_allergy">Soy allergy</option>
                   </select>
-                  <!-- <label class="form-label select-label">Choose option</label> -->
-
                 </div>
-
               </div>
-
               <div class="mt-4 pt-2 text-center">
                 <input data-mdb-ripple-init class="btn btn-primary btn-lg" type="submit" name="update" value="update"/>
               </div>
@@ -202,7 +177,6 @@ if (mysqli_num_rows($gotUser) > 0) {
  
 }
 }
-
 ?>
             </form>
           </div>

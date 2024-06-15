@@ -4,6 +4,7 @@ include ("../../includes/header.php");
 include ("../../includes/footer.php");
 include ("../../config/connection.php");
 include ("../../core/functions.php");
+include ("navbar.php");
 $id=$_GET['id'];
 
 ?>
@@ -69,25 +70,17 @@ body {
 </style>
 <h1 class="text-center mt-5">Inventory Management</h1>
 <section class="vh-100 gradient-custom">
-    <div class="container py-5 h-100">
+    <div class="container py-5 h-25">
         <div class="row justify-content-center align-items-center h-75">
             <div class="col-12 col-lg-9 col-xl-7">
                 <div class="card shadow-2-strong card-registration" style="border-radius: 15px;">
-                <!-- <div class="text-end mt-4 mb-0">
-                            <button class="btn btn-sm btn-dark">
-                                <a href="view_inventory.php" class="link" style="font-style:italic">View Available Inventory </a>
-                            </button>&nbsp;&nbsp;
-                        </div> -->
                     <div class="card-body p-4 p-md-5">
-
                         <h3 class="mb-4 text-center" style="margin-top:2%">Update Inventory</h3>
-                       
                         <form action="../../backend/update_item.php" method="post">
                             <?php
                             $query="SELECT * from fooditem WHERE item_id=$id";
                             $view_item_details=mysqli_query($connect,$query);
                             while($result=mysqli_fetch_assoc($view_item_details)){
-                               
                             ?>
                             <div class="row">
                                 <div class="col-12 mb-4">
@@ -97,7 +90,6 @@ body {
                                     ?>
                                     <div class="input-group mb-1">
                                         <span class="input-group-text" id="basic-addon1">#</span>
-                                        <!-- <label for=""><strong>SKU</strong></label> -->
                                         <input type="text" id="sku" name="sku" class="form-control form-control"
                                             style="font-style:italic"
                                             placeholder=""
@@ -107,12 +99,10 @@ body {
                             </div>
                             <div class="row">
                                 <div class="col-md-6 mb-4">
-
                                     <div data-mdb-input-init class="form-outline">
                                         <input type="text" id="item_name" name="item_name"
                                             class="form-control form-control" placeholder="Food item name..."  value="<?php echo $result['item_name'] ?>"/>
                                     </div>
-
                                 </div>
                                 <div class="col-md-6 mb-4">
                                     <div data-mdb-input-init class="form-outline">
@@ -121,13 +111,10 @@ body {
                                     </div>
                                 </div>
                             </div>
-
                             <div class="row">
                                 <div class="col-md-6 mb-4 d-flex align-items-center">
                                     <div data-mdb-input-init class="form-outline datepicker w-100">
                                         <h6 class="mb-2 pb-1"><strong>Expiry Date: </strong></h6>
-                                        <!-- <input id="expiry_date" name="expiry_date" class="form-control" type="date"
-                                            placeholder="Enter expiry date..."  required/> -->
                                             <input id="expiry_date" name="expiry_date" class="form-control" type="date" placeholder="Enter expiry date..." value="<?php echo $result['expiry_date'] ?>"/>
                                     </div>
                                 </div>
@@ -162,29 +149,11 @@ body {
                                 </div>
                             </div>
                             <div class="mt-3 pt-2 text-center">
-                                <!-- <form action="../../backend/update_item.php" method="post"> -->
                                     <button class="btn btn-outline-primary" name="update_item" type="submit" value="Update Item">
                                        Update Item
                                     </button>
-                                <!-- </form> -->
-
-
-                                <!-- <form action="../../backend/update_item.php">
-                                <button class="btn btn-outline-primary" name="update_item" type="submit" value="Update Item">
-                                    <a href="../../backend/update_item.php?id=<?php //echo $result['item_id'] ?>" type="submit">
-                                        Update Item
-                                    </a>    
-                                </button>
-                                </form> -->
-                                <!-- <input data-mdb-ripple-init class="btn btn-outline-info btn-lg" name="update_item" type="submit"
-                                    value="Update Item" /> -->
                             </div>
                         </form>
-                        <!-- <div class="mt-4 mb-0 text-end">
-                            <button class="btn btn-outline-primary">
-                                <i class="bi bi-qr-code-scan"></i> Add item using QR code
-                            </button>
-                        </div> -->
                         <?php
                     }
                     ?>
