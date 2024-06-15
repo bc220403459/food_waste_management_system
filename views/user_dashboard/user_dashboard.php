@@ -37,6 +37,18 @@ if (!isset($_SESSION['username']))
   20%, 60% { transform: translateX(-5px); }
   40%, 80% { transform: translateX(10px); }
 }
+.storageTipsBody{color: #333333
+}
+.storageTipsPrint{font-family:Book Antiqua; font-size:18.5pt; text-align:center; padding:15%; padding-top:20%; background-color:#fdbb2d}
+.storageTipsPrint{
+  /* background: linear-gradient(0deg, rgba(34,193,195,1) 22%, rgba(157,190,111,1) 50%, rgba(253,187,45,1) 100%); */
+  /* background: rgb(63,94,251);
+background: linear-gradient(311deg, rgba(63,94,251,1) 0%, rgba(252,70,107,1) 100%);  */
+/* background: rgb(131,58,180);
+background: linear-gradient(90deg, rgba(131,58,180,1) 6%, rgba(253,29,29,1) 46%, rgba(252,176,69,1) 100%);  */
+background: rgb(238,174,202);
+background: radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 100%); 
+}
 </style>
 <?php 
   $toExpire=getExpiringFoodItems();
@@ -60,8 +72,14 @@ if (!isset($_SESSION['username']))
           <a class="nav-link" href="feedback.php">Feedback</a>
         </li>
         <li class="nav-item">
+  <button class="btn btn-outline-primary btn-sm tipsButton" data-bs-toggle="modal" data-bs-target="#storageTipsModal">
+    <i class="bi bi-lightbulb-fill"></i> Storage Tips
+  </button>
+</li>
+
+        <!-- <li class="nav-item">
             <button class="btn btn-outline-primary btn-sm tipsButton"><i class="bi bi-lightbulb-fill"></i> Storage Tips</button>
-        </li>
+        </li> -->
         <li class="nav-item">
           <?php if (!$emptyCheck){
             ?>
@@ -196,6 +214,56 @@ if (!isset($_SESSION['username']))
   </div>
 </div>
 
+
+
+<!-- Modal -->
+<div class="modal fade" id="storageTipsModal" tabindex="-1" aria-labelledby="storageTipsModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="storageTipsModalLabel">Storage Tips</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body storageTipsBody">
+        <p class="storageTipsPrint">
+      <?php
+        
+$storageTips = array(
+    "<strong>Bananas:</strong> Keep bananas at room temperature until they ripen. Once ripe, store them in the refrigerator to extend their shelf life by a few days.",
+    "<strong>Berries:</strong> Store berries in a single layer in a shallow container lined with paper towels to absorb moisture. Do not wash until ready to eat.",
+    "<strong>Bread:</strong> Keep bread in a cool, dry place, preferably in a bread box. Avoid storing it in the refrigerator, as it will dry out faster.",
+    "<strong>Cheese:</strong> Wrap cheese in wax paper or parchment paper and then place it in a loose plastic bag. Store in the vegetable drawer of the refrigerator.",
+    "<strong>Cucumbers:</strong> Store cucumbers at room temperature. Refrigeration can cause them to become waterlogged and develop pitting.",
+    "<strong>Eggs:</strong> Store eggs in their original carton on a refrigerator shelf, not in the door, to maintain a consistent temperature.",
+    "<strong>Garlic:</strong> Keep garlic in a cool, dark place with good air circulation. A mesh bag or paper bag works well.",
+    "<strong>Herbs:</strong> Store fresh herbs in the refrigerator with their stems submerged in water, covered loosely with a plastic bag. Change the water every few days.",
+    "<strong>Lettuce:</strong> Wrap washed and dried lettuce in paper towels and store in a plastic bag or container in the refrigerator to keep it crisp.",
+    "<strong>Milk:</strong> Store milk on a refrigerator shelf, not in the door, to keep it at a consistent, cold temperature.",
+    "<strong>Mushrooms:</strong> Keep mushrooms in a paper bag in the refrigerator to prevent moisture buildup, which can cause spoilage.",
+    "<strong>Nuts:</strong> Store nuts in the refrigerator or freezer in an airtight container to prevent them from going rancid.",
+    "<strong>Onions:</strong> Store onions in a cool, dry, well-ventilated area away from potatoes, as they can cause each other to spoil faster.",
+    "<strong>Tomatoes:</strong> Store tomatoes at room temperature away from direct sunlight. Refrigeration can alter their texture and flavor.",
+    "<strong>Yogurt:</strong> Keep yogurt in the coldest part of the refrigerator, typically on a shelf rather than in the door, to maintain its freshness."
+);
+
+$randomTip = mt_rand(0, count($storageTips) - 1);
+echo $storageTips[$randomTip];
+?>
+</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.querySelector('.tipsButton').addEventListener('click', function() {
+    var myModal = new bootstrap.Modal(document.getElementById('storageTipsModal'));
+    myModal.show();
+  });
+</script>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
