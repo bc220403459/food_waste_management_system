@@ -1,5 +1,8 @@
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 <?php
-
+// include ("../includes/header.php");
 function dd($data)
 {
     echo "<pre style='background-color:black; color:yellow'>";
@@ -13,7 +16,13 @@ function calculateDaysUntilExpiry($expiryDate) {
     $currentTimestamp = time();
     $difference = $expiryTimestamp - $currentTimestamp;
     $daysUntilExpiry = floor($difference / (60 * 60 * 24));
-    return $daysUntilExpiry;
+    if ($daysUntilExpiry<0){ 
+        $daysLeft="<p class='badge badge-danger'>Expired</p>";
+        return $daysLeft; 
+    }
+    else{
+        return $daysUntilExpiry;
+    }
 }
 
 function getExpiringFoodItems() {
