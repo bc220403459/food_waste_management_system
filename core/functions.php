@@ -78,3 +78,39 @@ function generateRandomString($length,$number=false) {
     }
     return $randomString;
 }
+
+
+// function getExpiryStatus($expiryDate) {
+//     $expiryDateTime = new DateTime($expiryDate);
+//     $today = new DateTime();
+//     $interval = $expiryDateTime->diff($today);
+//     $daysUntilExpiry = $interval->days;
+//     if ($daysUntilExpiry < 0) {
+//       $status = "Expired";
+//     } elseif ($daysUntilExpiry <= 3) {
+//       $status = "Near Expiry";
+//     } else {
+//       $status = "Fresh";
+//     }
+//     // return array("days_until_expiry" => $daysUntilExpiry, "status" => $status);
+//     return $status;
+//   }
+  
+
+
+  function getExpiryStatus($expiryDate) {
+    $expiryDateTime = new DateTime($expiryDate);
+    $today = new DateTime();
+    $interval = $expiryDateTime->diff($today);
+    $daysUntilExpiry = $interval->days;
+    if ($daysUntilExpiry < 0) {
+      $status = "Expired";
+    } elseif ($daysUntilExpiry > 0) {
+      $status = "In Stock";
+    } else {
+      $status = "Near Expiry";
+    }
+    return $status;
+    // return array("days_until_expiry" => $daysUntilExpiry, "status" => $status);
+  }
+  

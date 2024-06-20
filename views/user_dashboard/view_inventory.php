@@ -65,6 +65,7 @@ include ('navbar.php');
                                     <th>Item Name</th>
                                     <th>Available Stock</th>
                                     <th>Expiry Date</th>
+                                    <th>Status</th>
                                     <th>Actions</th>
                                 </tr>
                                 <?php
@@ -79,6 +80,8 @@ include ('navbar.php');
                                             <td><?php echo $row['item_name'] ?></td>
                                             <td class="text-center"><?php echo $row['quantity'] ?></td>
                                             <td><?php echo getStandardDateFormat($row['expiry_date']) ?></td>
+                                            
+                                            <td><?php var_dump(getExpiryStatus($row['expiry_date'])) ?></td>
                                             <td>
                                                 <!-- <button class=""> -->
                                                     <!-- <form action="update_item.php?>id=<?php //echo $item_id?>"> -->
