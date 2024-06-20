@@ -73,7 +73,7 @@ background: radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 
         </li>
         <li class="nav-item">
   <button class="btn btn-outline-primary btn-sm tipsButton" data-bs-toggle="modal" data-bs-target="#storageTipsModal">
-    <i class="bi bi-lightbulb-fill"></i> Storage Tips
+    <i class="bi bi-lightbulb-fill"></i> Storage Tip of Day
   </button>
 </li>
 
@@ -221,7 +221,7 @@ background: radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="storageTipsModalLabel">Storage Tips</h5>
+        <h5 class="modal-title" id="storageTipsModalLabel">Storage Tip of the Day</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body storageTipsBody">
