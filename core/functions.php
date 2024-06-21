@@ -1,8 +1,20 @@
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+<style>
+    .danger-badge {
+  display: inline-block;
+  padding: .25em .4em;
+  font-size: 75%;
+  font-weight: bold;
+  line-height: 1;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  border-radius: .25rem;
+  background-color: #dc3545;
+  color: #fff;
+}
+
+</style>
 <?php
-// include ("../includes/header.php");
 function dd($data)
 {
     echo "<pre style='background-color:black; color:yellow'>";
@@ -17,34 +29,81 @@ function calculateDaysUntilExpiry($expiryDate) {
     $difference = $expiryTimestamp - $currentTimestamp;
     $daysUntilExpiry = floor($difference / (60 * 60 * 24));
     if ($daysUntilExpiry<0){ 
-        $daysLeft="<p class='badge badge-danger'>Expired</p>";
-        return $daysLeft; 
+        // $daysLeft="<p class='badge badge-danger'>Expired</p>";
+        // return $daysLeft; 
+        echo "<span class='danger-badge'>Expired</span>";
     }
     else{
         return $daysUntilExpiry;
     }
 }
 
+// function getExpiringFoodItems() {
+//     $servername = "localhost"; 
+//     $username = "root"; 
+//     $password = ""; 
+//     $dbname = "fwms"; 
+//     $conn = new mysqli($servername, $username, $password, $dbname);
+//     if ($conn->connect_error) {
+//         die("Connection failed: " . $conn->connect_error);
+//     }
+//     $threeDaysFromNow = date('Y-m-d', strtotime('+3 days'));
+//     $sql = "SELECT * FROM fooditem WHERE expiry_date <= '$threeDaysFromNow'";
+//     $today = date('Y-m-d'); 
+//     $result = $conn->query($sql);
+//     $expiredItems="SELECT * FROM fooditem WHERE expiry_date <$today";
+//     if ($result->num_rows > 0) {
+//             $foodItems = $result->fetch_all(MYSQLI_ASSOC);
+//     } else {
+//         $foodItems = []; 
+//     }
+//     $conn->close();
+//     return $foodItems;
+// }
+
+
 function getExpiringFoodItems() {
-    $servername = "localhost"; 
-    $username = "root"; 
-    $password = ""; 
-    $dbname = "fwms"; 
+    $servername = "localhost";
+    $username = "root";
+    $password = "";
+    $dbname = "fwms";
+  
     $conn = new mysqli($servername, $username, $password, $dbname);
     if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
+      die("Connection failed: " . $conn->connect_error);
     }
+  
     $threeDaysFromNow = date('Y-m-d', strtotime('+3 days'));
-    $sql = "SELECT * FROM fooditem WHERE expiry_date <= '$threeDaysFromNow'";
+    $today = date('Y-m-d'); // Get today's date
+  
+    $sql = "SELECT * FROM fooditem 
+            WHERE expiry_date <= '$threeDaysFromNow' ";
+            /*AND expiry_date >= '$today'";*/ // Filter for items within 3 days and not expired
+  
     $result = $conn->query($sql);
+  
     if ($result->num_rows > 0) {
-        $foodItems = $result->fetch_all(MYSQLI_ASSOC);
+      $foodItems = $result->fetch_all(MYSQLI_ASSOC);
     } else {
-        $foodItems = []; 
+      $foodItems = [];
     }
+  
     $conn->close();
     return $foodItems;
-}
+  }
+  
+  function returnStatus($date) {
+    $today = date('Y-m-d'); // Get today's date
+  
+    $dateTimeToday = DateTime::createFromFormat('Y-m-d', $today);
+    $dateTimeExpiry = DateTime::createFromFormat('Y-m-d', $date);
+  
+    if ($dateTimeToday > $dateTimeExpiry) {
+      echo "Expired";
+    }
+  }
+  
+
 function errorShow($var)
 {
     echo "<pre style='background-color:black; color:red; font-size:15pt; padding-top:6px; padding-bottom:6px; padding-left:4px'><strong><span style='font-style:none'>Error:</span></strong> ";
@@ -113,4 +172,62 @@ function generateRandomString($length,$number=false) {
     return $status;
     // return array("days_until_expiry" => $daysUntilExpiry, "status" => $status);
   }
+  
+
+
+
+
+
+
+
+
+  function suggestRecipes($userIngredients, $recipes, $userDietary, $userSkill) {
+    $suggestions = [];
+  
+    foreach ($recipes["name"] as $recipeName => $recipeData) {
+      $ingredientMatchScore = 0;
+      $dietaryMatch = true;
+      $skillMatch = true;
+  
+      // Check ingredient match
+      foreach ($recipeData["ingredients"] as $recipeIngredient) {
+        if (in_array($recipeIngredient, $userIngredients)) {
+          $ingredientMatchScore++;
+        } elseif (is_array($recipeIngredient)) { // Check for substitutes (optional)
+          $substituteFound = false;
+          foreach ($recipeIngredient as $substitute) {
+            if (in_array($substitute, $userIngredients)) {
+              $substituteFound = true;
+              break;
+            }
+          }
+          if ($substituteFound) {
+            $ingredientMatchScore++;
+          }
+        }
+      }
+  
+      // Check dietary restrictions
+      if ($userDietary != "not_specified" && !in_array($userDietary, $recipeData["dietary"])) {
+        $dietaryMatch = false;
+      }
+  
+      // Check skill level
+      if ($userSkill != $recipeData["difficulty"]) {
+        $skillMatch = false;
+      }
+  
+      // Add recipe to suggestions if all criteria match
+      if ($ingredientMatchScore > 0 && $dietaryMatch && $skillMatch) {
+        $suggestions[$recipeName] = $ingredientMatchScore;
+      }
+    }
+  
+    // Sort suggestions by score (highest to lowest)
+    arsort($suggestions);
+  
+    return $suggestions;
+  }
+  
+  $suggestedRecipes = suggestRecipes($userIngredients, $recipes, $userDietary, $userSkill);
   

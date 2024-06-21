@@ -141,7 +141,7 @@ body {
                             </div>
                             <div class="mt-3 pt-2 text-center">
                                 <input data-mdb-ripple-init class="btn btn-outline-info btn-lg" name="add_inventory" type="submit"
-                                    value="Add item" />
+                                    value="Give Feedback" />
                             </div>
                         </form>
                         <div class="mt-4 mb-0 text-end">

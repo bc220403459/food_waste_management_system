@@ -175,6 +175,7 @@ $emptyCheck = empty($toExpire);
                 <th>Expiry Date</th>
                 <th>Days Remaining</th>
                 <th>Storage Location</th>
+                <th>Status</th>
               </tr>
               <?php
               $expiringFoodItems = getExpiringFoodItems();
@@ -206,6 +207,7 @@ $emptyCheck = empty($toExpire);
                       }
                       ?>
                     </td>
+                    <td><?php echo returnStatus($item['expiry_date']) ?></td>
                   </tr>
                   <?php
                 }
@@ -325,6 +327,86 @@ $emptyCheck = empty($toExpire);
   $deitaryPreference = $_SESSION['dietary_preference'];
   $alleryInfo = $_SESSION['allergy_info'];
   $test = getExpiringFoodItems();
-  dd($test);
+  // dd($test);
   ?>
 </p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<?php
+
+
+
+$ingredients = [
+  "chicken breast",
+  "carrot",
+  "onion",
+  "rice",
+  "beans",
+  "eggs",
+  "cheese",
+  "pasta",
+  "tomatoes",
+];
+
+$recipes = [
+  "name" => [
+    "Chicken Fried Rice" => [
+      "ingredients" => ["chicken breast", "rice", "eggs", "carrot", "onion"],
+      "cuisine" => "Chinese",
+      "meal_type" => "dinner",
+      "cooking_time" => 30,
+      "difficulty" => "easy",
+      "dietary" => ["not_specified"],
+    ],
+    "Pasta Primavera" => [
+      "ingredients" => ["pasta", "vegetables" => ["tomatoes", "beans"], "cheese"],
+      "cuisine" => "Italian",
+      "meal_type" => "lunch",
+      "cooking_time" => 20,
+      "difficulty" => "medium",
+      "dietary" => ["vegetarian"],
+    ],
+    "Scrambled Eggs" => [
+      "ingredients" => ["eggs", "milk" => "optional"],
+      "cuisine" => "American",
+      "meal_type" => "breakfast",
+      "cooking_time" => 10,
+      "difficulty" => "easy",
+      "dietary" => ["not_specified"],
+    ],
+  ],
+];
+
+
+
+$userIngredients = ["chicken breast", "rice", "eggs"];
+$userDietary = "not_specified"; // Replace with actual user selection
+$userSkill = "easy"; // Replace with actual user selection
+
+
+
+
+
+if (!empty($suggestedRecipes)) {
+  echo "<h2>Suggested Recipes for Your Leftovers:</h2>";
+  foreach ($suggestedRecipes as $recipeName => $score) {
+    echo "<p>$recipeName (Score: $score)</p>";
+  }
+} else {
+  echo "No recipes found that match your ingredients, dietary preferences, and skill level.";
+}
+
+
+?>

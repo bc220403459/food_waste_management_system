@@ -16,6 +16,10 @@
         <li class="nav-item">
           <a class="nav-link" href="feedback.php">Feedback</a>
         </li>
+        <li class="nav-item">
+      <a class="nav-link" href="storage_tips.php">Storage Tips</a>
+        </li>
+     
         <!-- <li class="nav-item">
           
           <button type="button" class="btn btn-sm btn-outline-danger" data-toggle="modal" data-target="#expiryReminder">
