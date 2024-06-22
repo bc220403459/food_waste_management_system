@@ -175,7 +175,7 @@ $emptyCheck = empty($toExpire);
                 <th>Expiry Date</th>
                 <th>Days Remaining</th>
                 <th>Storage Location</th>
-                <th>Status</th>
+                <!-- <th>Status</th> -->
               </tr>
               <?php
               $expiringFoodItems = getExpiringFoodItems();
@@ -207,7 +207,7 @@ $emptyCheck = empty($toExpire);
                       }
                       ?>
                     </td>
-                    <td><?php echo returnStatus($item['expiry_date']) ?></td>
+                    <!-- <td><?php //echo returnStatus($item['expiry_date']) ?></td> -->
                   </tr>
                   <?php
                 }
@@ -331,6 +331,11 @@ $emptyCheck = empty($toExpire);
   ?>
 </p>
 
+<div class="text-center mt-4 mb-5">
+  <h1 class="text-center text-success">Welcome back, <em><?php echo $_SESSION['username'] ?></em></h1>
+  
+  
+  
 
 
 
@@ -338,75 +343,90 @@ $emptyCheck = empty($toExpire);
 
 
 
-
-
-
-
-
+</div>
 
 <?php
 
+// // Sample recipe data (replace with actual database connection)
+// $recipes = [
+//   "recipe_1" => [
+//     "ingredients" => ["chicken", "broccoli", "rice"],
+//     "dietary" => ["gluten-free"],
+//     "difficulty" => "easy",
+//     "cuisine" => "Asian",
+//     "meal_type" => "dinner",
+//     "cooking_time" => 30,
+//   ],
+//   "recipe_2" => [
+//     "ingredients" => ["pasta", "tomatoes", "onions"],
+//     "dietary" => ["vegetarian"],
+//     "difficulty" => "intermediate",
+//     "cuisine" => "Italian",
+//     "meal_type" => "lunch",
+//     "cooking_time" => 45,
+//   ],
+//   // Add more recipes following the same structure
+// ];
 
+// // User input (replace with form handling)
+// $userIngredients = ["chicken", "broccoli"];
 
-$ingredients = [
-  "chicken breast",
-  "carrot",
-  "onion",
-  "rice",
-  "beans",
-  "eggs",
-  "cheese",
-  "pasta",
-  "tomatoes",
-];
+// // Matching algorithm (simple approach)
+// $potentialRecipes = [];
+// foreach ($recipes as $recipeId => $recipe) {
+//   $ingredientMatch = true;
+//   foreach ($userIngredients as $userIngredient) {
+//     if (!in_array($userIngredient, $recipe["ingredients"])) {
+//       $ingredientMatch = false;
+//       break;
+//     }
+//   }
+//   if ($ingredientMatch) {
+//     $potentialRecipes[$recipeId] = $recipe;
+//   }
+// }
 
-$recipes = [
-  "name" => [
-    "Chicken Fried Rice" => [
-      "ingredients" => ["chicken breast", "rice", "eggs", "carrot", "onion"],
-      "cuisine" => "Chinese",
-      "meal_type" => "dinner",
-      "cooking_time" => 30,
-      "difficulty" => "easy",
-      "dietary" => ["not_specified"],
-    ],
-    "Pasta Primavera" => [
-      "ingredients" => ["pasta", "vegetables" => ["tomatoes", "beans"], "cheese"],
-      "cuisine" => "Italian",
-      "meal_type" => "lunch",
-      "cooking_time" => 20,
-      "difficulty" => "medium",
-      "dietary" => ["vegetarian"],
-    ],
-    "Scrambled Eggs" => [
-      "ingredients" => ["eggs", "milk" => "optional"],
-      "cuisine" => "American",
-      "meal_type" => "breakfast",
-      "cooking_time" => 10,
-      "difficulty" => "easy",
-      "dietary" => ["not_specified"],
-    ],
-  ],
-];
+// // Filtering (optional, replace with user selections)
+// $filteredRecipes = $potentialRecipes;
+// $selectedCuisine = null; // Replace with user selection
+// $selectedMealType = null; // Replace with user selection
 
+// if ($selectedCuisine) {
+//   $filteredRecipes = array_filter($filteredRecipes, function ($recipe) use ($selectedCuisine) {
+//     return $recipe["cuisine"] === $selectedCuisine;
+//   });
+// }
 
+// if ($selectedMealType) {
+//   $filteredRecipes = array_filter($filteredRecipes, function ($recipe) use ($selectedMealType) {
+//     return $recipe["meal_type"] === $selectedMealType;
+//   });
+// }
 
-$userIngredients = ["chicken breast", "rice", "eggs"];
-$userDietary = "not_specified"; // Replace with actual user selection
-$userSkill = "easy"; // Replace with actual user selection
-
-
-
-
-
-if (!empty($suggestedRecipes)) {
-  echo "<h2>Suggested Recipes for Your Leftovers:</h2>";
-  foreach ($suggestedRecipes as $recipeName => $score) {
-    echo "<p>$recipeName (Score: $score)</p>";
-  }
-} else {
-  echo "No recipes found that match your ingredients, dietary preferences, and skill level.";
-}
-
+// // Display suggestions
+// if (empty($filteredRecipes)) {
+//   echo "No recipes found for your leftover ingredients.";
+// } else {
+//   echo "<h2>Recipe Suggestions</h2>";
+//   foreach ($filteredRecipes as $recipeId => $recipe) {
+//     echo "<div class='recipe'>";
+//     echo "<h3>" . $recipeId . "</h3>";
+//     echo "<p>Cuisine: " . $recipe["cuisine"] . "</p>";
+//     echo "<p>Meal Type: " . $recipe["meal_type"] . "</p>";
+//     echo "<p>Cooking Time: " . $recipe["cooking_time"] . " minutes</p>";
+//     // Add link to recipe details or instructions (replace with actual link)
+//     echo "<a href='https://www.example.com/recipe/" . $recipeId . "'>View Recipe</a>";
+//     echo "</div>";
+//   }
+// }
 
 ?>
+
+
+
+
+
+
+
+
+
