@@ -427,6 +427,19 @@ $emptyCheck = empty($toExpire);
 
 
 
+<?php 
+$itemName = "Bread";
+$quantity = findQuantity($itemName);
+
+if ($quantity !== null) {
+  echo "Quantity of $itemName: $quantity";
+} else {
+  echo "$itemName not found in fooditem table.";
+}
+?>
+
+
+
 
 
 

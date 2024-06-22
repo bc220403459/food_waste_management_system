@@ -175,7 +175,55 @@ function generateRandomString($length,$number=false) {
   
 
 
+// function findQuantity($item){
+  // $servername = "localhost";
+  // $username = "root";
+  // $password = "";
+  // $dbname = "fwms";
 
+  // $conn = new mysqli($servername, $username, $password, $dbname);
+  // if ($conn->connect_error) {
+  //   die("Connection failed: " . $conn->connect_error);
+  // }
+  // $query="SELECT quantity FROM fooditem WHERE item_name = '".$item."' ";
+  // var_dump($query); 
+  // $findQuantity=mysqli_query($conn,$query);
+  // if (!$findQuantity){
+  //   echo "Invalid Operation";
+  // }
+  // return $findQuantity;
+// }
 
+function findQuantity(string $item): mixed
+{
+  $servername = "localhost";
+  $username = "root";
+  $password = "";
+  $dbname = "fwms";
+
+  $conn = new mysqli($servername, $username, $password, $dbname);
+  if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+  }
+
+  // Prepare a parameterized query to prevent SQL injection
+  $stmt = $conn->prepare("SELECT quantity FROM fooditem WHERE item_name REGEXP ?");
+  $stmt->bind_param("s", $item); // Bind the item as a string parameter
+
+  $stmt->execute();
+  $result = $stmt->get_result(); // Get the result from the prepared statement
+
+  if ($result && $result->num_rows > 0) {
+    $row = $result->fetch_assoc();
+    return $row['quantity']; // Return the quantity from the first row
+  } else {
+    return null; // Item not found
+  }
+
+  // $stmt->close(); // Close the prepared statement
+  // $conn->close(); // Close the connection
+}
+
+// Example usage
 
 
