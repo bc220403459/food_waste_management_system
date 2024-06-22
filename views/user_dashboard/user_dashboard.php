@@ -331,134 +331,379 @@ $emptyCheck = empty($toExpire);
   ?>
 </p>
 
-<div class="text-center mt-4 mb-5">
+<div class="mt-4 mb-5">
   <h1 class="text-center text-success">Welcome back, <em><?php echo $_SESSION['username'] ?></em></h1>
   
-  
-  
 
-
-
-
-
-
-
-</div>
+<p>Food suggestions for you according to your Dietary Preference:</p>
 
 <?php
+$biryani=findQuantity("rice")>=1 && findQuantity('chicken')>=1 && findQuantity('masala')>=1;
+$pizza=findQuantity('dough')>=1 && findQuantity('tomato')>=1 && findQuantity('olive')>=1 && findQuantity('cheese')>=1 && findQuantity('sauces');
+$burger=findQuantity('bun')>=1 && findQuantity('chicken')>=1 && findQuantity('onion') && findQuantity('ketchup') && findQuantity('mayonese');
+$beefPulao=findQuantity('rice')>=1 && findQuantity('beef')>=1 && findQuantity('masala')>=1;
+$shawarma=findQuantity('shawarma bread')>=1 && findQuantity('mayonese') && findQuantity('chicken')>=1 && findQuantity('pickles')>=1 && findQuantity('sauces')>=1;
+$qorma=findQuantity('chicken')>=1 && findQuantity('masala')>=1 && findQuantity('tomato')>=1 && findQuantity('onion')>=1;
+$mixSalad=findQuantity('apple')>=1 && findQuantity('banana')>=1 && findQuantity('cucumber')>=1 && findQuantity('chickpeas')>=1;
+$vegSalad=findQuantity('beetroot')>=1 && findQuantity('cabbage')>=1 && findQuantity('cucumber')>=1 && findQuantity('carrot')>=1;
+$fruitSalad=findQuantity('apple')>=1 && findQuantity('banana')>=1 && findQuantity('guava')>=1 && findQuantity('melon')>=1 && findQuantity('watermelon')>=1;
+$vegPulao=findQuantity('rice')>=1 && findQuantity('potato')>=1 && findQuantity('masala')>=1;
 
-// // Sample recipe data (replace with actual database connection)
-// $recipes = [
-//   "recipe_1" => [
-//     "ingredients" => ["chicken", "broccoli", "rice"],
-//     "dietary" => ["gluten-free"],
-//     "difficulty" => "easy",
-//     "cuisine" => "Asian",
-//     "meal_type" => "dinner",
-//     "cooking_time" => 30,
-//   ],
-//   "recipe_2" => [
-//     "ingredients" => ["pasta", "tomatoes", "onions"],
-//     "dietary" => ["vegetarian"],
-//     "difficulty" => "intermediate",
-//     "cuisine" => "Italian",
-//     "meal_type" => "lunch",
-//     "cooking_time" => 45,
-//   ],
-//   // Add more recipes following the same structure
-// ];
-
-// // User input (replace with form handling)
-// $userIngredients = ["chicken", "broccoli"];
-
-// // Matching algorithm (simple approach)
-// $potentialRecipes = [];
-// foreach ($recipes as $recipeId => $recipe) {
-//   $ingredientMatch = true;
-//   foreach ($userIngredients as $userIngredient) {
-//     if (!in_array($userIngredient, $recipe["ingredients"])) {
-//       $ingredientMatch = false;
-//       break;
-//     }
-//   }
-//   if ($ingredientMatch) {
-//     $potentialRecipes[$recipeId] = $recipe;
-//   }
-// }
-
-// // Filtering (optional, replace with user selections)
-// $filteredRecipes = $potentialRecipes;
-// $selectedCuisine = null; // Replace with user selection
-// $selectedMealType = null; // Replace with user selection
-
-// if ($selectedCuisine) {
-//   $filteredRecipes = array_filter($filteredRecipes, function ($recipe) use ($selectedCuisine) {
-//     return $recipe["cuisine"] === $selectedCuisine;
-//   });
-// }
-
-// if ($selectedMealType) {
-//   $filteredRecipes = array_filter($filteredRecipes, function ($recipe) use ($selectedMealType) {
-//     return $recipe["meal_type"] === $selectedMealType;
-//   });
-// }
-
-// // Display suggestions
-// if (empty($filteredRecipes)) {
-//   echo "No recipes found for your leftover ingredients.";
-// } else {
-//   echo "<h2>Recipe Suggestions</h2>";
-//   foreach ($filteredRecipes as $recipeId => $recipe) {
-//     echo "<div class='recipe'>";
-//     echo "<h3>" . $recipeId . "</h3>";
-//     echo "<p>Cuisine: " . $recipe["cuisine"] . "</p>";
-//     echo "<p>Meal Type: " . $recipe["meal_type"] . "</p>";
-//     echo "<p>Cooking Time: " . $recipe["cooking_time"] . " minutes</p>";
-//     // Add link to recipe details or instructions (replace with actual link)
-//     echo "<a href='https://www.example.com/recipe/" . $recipeId . "'>View Recipe</a>";
-//     echo "</div>";
-//   }
-// }
-
+$vegan =($_SESSION['dietary_preference']="vegan");
+$vegetarian =($_SESSION['dietary_preference']="vegetarian");
+$gluten_free =($_SESSION['dietary_preference']="gluten_free");
+$dairy_free =($_SESSION['dietary_preference']="dairy_free");
+$low_carb =($_SESSION['dietary_preference']="low_carb");
+$ketogenic =($_SESSION['dietary_preference']="ketogenic");
 ?>
-
-
 
 
 
 
 <?php 
-$rice=findQuantity("rice");
-$chicken=findQuantity("chicken");
-$masala=findQuantity("masala");
-
-// $biryani=$rice>=1 && $chicken>=1 && $masala>=1;
-$biryani=findQuantity("rice")>=1 && findQuantity('chicken')>=1 && findQuantity('masala')>=1;
-$pizza=findQuantity('dough')>=1 && findQuantity('tomato')>=1 && findQuantity('olives')>=1 && findQuantity('cheese')>=1 && findQuantity('sauces');
-$burger=findQuantity('bun')>=1 && findQuantity('chicken')>=1 && findQuantity('onion') && findQuantity('ketchup') && findQuantity('mayonese');
-$beefPulao=findQuantity('rice')>=1 && findQuantity('beef')>=1 && findQuantity('masala')>=1;
-$shawarma=findQuantity('shawarma bread')>=1 && findQuantity('mayonese') && findQuantity('chicken')>=1 && findQuantity('pickles')>=1 && findQuantity('sauces')>=1;
-$qorma=findQuantity('chicken')>=1 && findQuantity('masala')>=1 && findQuantity('tomato')>=1 && findQuantity('onion')>=1;
-
 if ($biryani){
-  echo "Biryani is available";
+  $query="SELECT * FROM recipe WHERE recipe_name REGEXP 'biryani' ";
+  $biryani=mysqli_query($connect,$query);
+  while($biryani_data=mysqli_fetch_assoc($biryani)){
+?>
+<div class="card" style="width: 18rem; margin-left:10px">
+  <div class="card-body">
+    <h5 class="card-title">Biryani</h5>
+    <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+    <p class="card-text">
+      <strong>Cuisine: </strong> <?php echo capitalise($biryani_data['cuisine']) ?> <br/>
+      <strong>Meal Type: </strong> <?php echo capitalise($biryani_data['meal_type']) ?><br/>
+      <strong>Cooking Time: </strong> <?php echo capitalise($biryani_data['cooking_time']) ?> minutes </br>
+    </p>
+    <p class="text-center">
+      <a href="feedback.php" class="card-link">Rate Recipe</a>
+    </p>
+  </div>
+</div>
+<?php
+ }
 }
-
-
-// $quantity = findQuantity($itemName);
-
+?>
+</div>
 
 
 
-// if ($quantity !== null) {
-//   echo "Quantity of $itemName: $quantity";
-// } else {
-//   echo "$itemName not found in fooditem table.";
+<?php
+// $dishes = array("biryani", "pizza", "burger", "beefPulao", "shawarma", "qorma", "mixSalad", "vegSalad", "fruitSalad", "vegPulao");
+
+// foreach ($dishes as $dish) {
+//   if ($dish) {
+//     $query = "SELECT * FROM recipe WHERE recipe_name REGEXP '$dish'";
+//     $result = mysqli_query($connect, $query);
+
+//     if (mysqli_num_rows($result) > 0) {
+//       while ($dish_data = mysqli_fetch_assoc($result)) {
+//         echo "<div class='card' style='width: 18rem; margin-left:10px'>";
+//         echo "<div class='card-body'>";
+//         echo "<h5 class='card-title'>" . ucfirst($dish) . "</h5>"; // Capitalize the first letter of the dish name
+//         echo "<h6 class='card-subtitle mb-2 text-muted'>Card subtitle</h6>";
+//         echo "<p class='card-text'>";
+//         echo "<strong>Cuisine: </strong>" . capitalise($dish_data['cuisine']) . "<br/>";
+//         echo "<strong>Meal Type: </strong>" . capitalise($dish_data['meal_type']) . "<br/>";
+//         echo "<strong>Cooking Time: </strong>" . capitalise($dish_data['cooking_time']) . " minutes </br>";
+//         echo "</p>";
+//         echo "<p class='text-center'>";
+//         echo "<a href='feedback.php' class='card-link'>Rate Recipe</a>";
+//         echo "</p>";
+//         echo "</div>";
+//         echo "</div>";
+//       }
+//     } else {
+//       // Handle the case where no recipe is found for the dish
+//       echo "<p>No recipes found for " . ucfirst($dish) . "</p>";
+//     }
+
+//     mysqli_free_result($result); // Free the result memory
+//   }
+// }
+?>
+
+
+<?php
+// $dishes = array("biryani", "pizza", "burger", "beefPulao", "shawarma", "qorma", "mixSalad", "vegSalad", "fruitSalad", "vegPulao");
+// $columnCount = 0; // Keeps track of the number of cards in the current column
+
+// foreach ($dishes as $dish) {
+//   if ($dish) {
+//     $query = "SELECT * FROM recipe WHERE recipe_name REGEXP '$dish'";
+//     $result = mysqli_query($connect, $query);
+
+//     if (mysqli_num_rows($result) > 0) {
+//       if ($columnCount % 3 === 0) { // Start a new column every 3rd dish
+//         echo "<div class='row'>"; // Open a new row for the cards
+//       }
+
+//       while ($dish_data = mysqli_fetch_assoc($result)) {
+//         echo "<div class='card col-md-4' style='margin-left:10px'>"; // Set card width to fit 3 in a row
+//         echo "<div class='card-body'>";
+//         echo "<h5 class='card-title'>" . ucfirst($dish) . "</h5>"; // Capitalize the first letter of the dish name
+//         echo "<h6 class='card-subtitle mb-2 text-muted'>Card subtitle</h6>";
+//         echo "<p class='card-text'>";
+//         echo "<strong>Cuisine: </strong>" . capitalise($dish_data['cuisine']) . "<br/>";
+//         echo "<strong>Meal Type: </strong>" . capitalise($dish_data['meal_type']) . "<br/>";
+//         echo "<strong>Cooking Time: </strong>" . capitalise($dish_data['cooking_time']) . " minutes </br>";
+//         echo "</p>";
+//         echo "<p class='text-center'>";
+//         echo "<a href='feedback.php' class='card-link'>Rate Recipe</a>";
+//         echo "</p>";
+//         echo "</div>";
+//         echo "</div>";
+//         $columnCount++; // Increment card counter
+//       }
+
+//       if ($columnCount % 3 === 0) { // Close the row if 3 cards are displayed
+//         echo "</div>"; // Close the row for the cards
+//       }
+//     } else {
+//       // Handle the case where no recipe is found for the dish
+//       echo "<p>No recipes found for " . ucfirst($dish) . "</p>";
+//     }
+
+//     mysqli_free_result($result); // Free the result memory
+//   }
+// }
+
+// // Close any remaining open row (if there are less than 3 dishes)
+// if ($columnCount % 3 !== 0) {
+//   echo "</div>"; // Close the last row for the cards
+// }
+?>
+
+
+<?php
+// $dishes = array("biryani", "pizza", "burger", "beefPulao", "shawarma", "qorma", "mixSalad", "vegSalad", "fruitSalad", "vegPulao");
+// $rowCount = 0; // Keeps track of the number of rows
+// $columnCount = 0; // Keeps track of the number of cards in the current row
+
+// foreach ($dishes as $dish) {
+//   if ($dish) {
+//     $query = "SELECT * FROM recipe WHERE recipe_name REGEXP '$dish'";
+//     $result = mysqli_query($connect, $query);
+
+//     if (mysqli_num_rows($result) > 0) {
+//       if ($rowCount === 0) { // Open a new row for the first dish
+//         echo "<div class='row'>"; // Open a new row for the cards
+//       }
+
+//       while ($dish_data = mysqli_fetch_assoc($result)) {
+//         echo "<div class='card col-md-4' style='width: 400px; height: 200px; margin: 10px;'>"; // Set card dimensions and margin
+//         echo "<div class='card-body'>";
+//         echo "<h5 class='card-title'>" . ucfirst($dish) . "</h5>"; // Capitalize the first letter of the dish name
+//         echo "<h6 class='card-subtitle mb-2 text-muted'>Card subtitle</h6>";
+//         echo "<p class='card-text'>";
+//         echo "<strong>Cuisine: </strong>" . capitalise($dish_data['cuisine']) . "<br/>";
+//         echo "<strong>Meal Type: </strong>" . capitalise($dish_data['meal_type']) . "<br/>";
+//         echo "<strong>Cooking Time: </strong>" . capitalise($dish_data['cooking_time']) . " minutes </br>";
+//         echo "</p>";
+//         echo "<p class='text-center'>";
+//         echo "<a href='feedback.php' class='card-link'>Rate Recipe</a>";
+//         echo "</p>";
+//         echo "</div>";
+//         echo "</div>";
+//         $columnCount++;
+
+//         if ($columnCount % 3 === 0) { // Close the row if 3 cards are displayed
+//           echo "</div>"; // Close the row for the cards
+//           $rowCount++; // Increment row counter
+//           $columnCount = 0; // Reset column counter for the next row
+//         }
+//       }
+
+//       // Close any remaining open row (if there are less than 3 dishes in the last row)
+//       if ($columnCount > 0) {
+//         echo "</div>"; // Close the last row for the cards
+//       }
+//     } else {
+//       // Handle the case where no recipe is found for the dish
+//       echo "<p>No recipes found for " . ucfirst($dish) . "</p>";
+//     }
+
+//     mysqli_free_result($result); // Free the result memory
+//   }
+// }
+
+// // Close any remaining open row (if there are less than 9 dishes)
+// if ($rowCount < 3) {
+//   echo "</div>"; // Close the
 // }
 ?>
 
 
 
+<?php
+// $dishes = array("biryani", "pizza", "burger", "beefPulao", "shawarma", "qorma", "mixSalad", "vegSalad", "fruitSalad", "vegPulao");
+// $rowCount = 0; // Keeps track of the number of rows
+// $columnCount = 0; // Keeps track of the number of cards in the current row
 
+// foreach ($dishes as $dish) {
+//   if ($dish) {
+//     $query = "SELECT * FROM recipe WHERE recipe_name REGEXP '$dish'";
+//     $result = mysqli_query($connect, $query);
 
+//     if (mysqli_num_rows($result) > 0) {
+//       if ($rowCount === 0) { // Open a new row for the first dish
+//         echo "<div class='row'>"; // Open a new row for the cards
+//       }
 
+//       while ($dish_data = mysqli_fetch_assoc($result)) {
+//         echo "<div class='card col d-flex justify-content-center' >"; // Set card dimensions and margin
+//         echo "<div class='card-body'>";
+//         echo "<h5 class='card-title'>" . ucfirst($dish) . "</h5>"; // Capitalize the first letter of the dish name
+//         echo "<h6 class='card-subtitle mb-2 text-muted'>Card subtitle</h6>";
+//         echo "<p class='card-text'>";
+//         echo "<strong>Cuisine: </strong>" . capitalise($dish_data['cuisine']) . "<br/>";
+//         echo "<strong>Meal Type: </strong>" . capitalise($dish_data['meal_type']) . "<br/>";
+//         echo "<strong>Cooking Time: </strong>" . capitalise($dish_data['cooking_time']) . " minutes </br>";
+//         echo "</p>";
+//         echo "<p class='text-center'>";
+//         echo "<a href='feedback.php' class='card-link'>Rate Recipe</a>";
+//         echo "</p>";
+//         echo "</div>";
+//         echo "</div>";
+//         $columnCount++;
+
+//         if ($columnCount % 3 === 0) { // Close the row if 3 cards are displayed
+//           echo "</div>"; // Close the row for the cards
+//           $rowCount++; // Increment row counter
+//           $columnCount = 0; // Reset column counter for the next row
+//         }
+//       }
+
+//       // Close any remaining open row (if there are less than 3 dishes in the last row)
+//       if ($columnCount > 0) {
+//         echo "</div>"; // Close the last row for the cards
+//       }
+//     } else {
+//       // Handle the case where no recipe is found for the dish
+//       echo "<p>No recipes found for " . ucfirst($dish) . "</p>";
+//     }
+
+//     mysqli_free_result($result); // Free the result memory
+//   }
+// }
+
+// // Close any remaining open row (if there are less than 9 dishes)
+// if ($rowCount < 3) {
+//   echo "</div>"; // Close the last row for the cards
+// }
+?>
+
+<?php
+//! PERFECT WORKING CODE BELOW 
+?>
+
+<?php
+// $dishes = array("biryani", "pizza", "burger", "beefPulao", "shawarma", "qorma", "mixSalad", "vegSalad", "fruitSalad", "vegPulao");
+// $rowCount = 0; // Keeps track of the number of rows
+// $columnCount = 0; // Keeps track of the number of cards in the current row
+
+// foreach ($dishes as $dish) {
+//   if ($dish) {
+//     $query = "SELECT * FROM recipe WHERE recipe_name REGEXP '$dish'";
+//     $result = mysqli_query($connect, $query);
+
+//     if (mysqli_num_rows($result) > 0) {
+//       if ($rowCount === 0) { // Open a new row for the first dish
+//         echo "<div class='row'>"; // Open a new row for the cards
+//       }
+
+//       while ($dish_data = mysqli_fetch_assoc($result)) {
+//         echo "<div class='card col-sm-4' style='margin:1%; margin-left:2%; height:11%; width:28%'>"; // Set card size using Bootstrap class
+//         echo "<div class='card-body'>";
+//         echo "<h5 class='card-title'>" . ucfirst($dish) . "</h5>"; // Capitalize the first letter of the dish name
+//         echo "<h6 class='card-subtitle mb-2 text-muted'>Card subtitle</h6>";
+//         echo "<p class='card-text'>";
+//         echo "<strong>Cuisine: </strong>" . capitalise($dish_data['cuisine']) . "<br/>";
+//         echo "<strong>Meal Type: </strong>" . capitalise($dish_data['meal_type']) . "<br/>";
+//         echo "<strong>Cooking Time: </strong>" . capitalise($dish_data['cooking_time']) . " minutes </br>";
+//         echo "</p>";
+//         echo "<p class='text-center'>";
+//         echo "<a href='feedback.php' class='card-link'>Rate Recipe</a>";
+//         echo "</p>";
+//         echo "</div>";
+//         echo "</div>";
+//         $columnCount++;
+
+//         if ($columnCount % 3 === 0) { // Close the row if 3 cards are displayed
+//           echo "</div>"; // Close the row for the cards
+//           $rowCount++; // Increment row counter
+//           $columnCount = 0; // Reset column counter for the next row
+//         }
+//       }
+
+//       // Close any remaining open row (if there are less than 3 dishes in the last row)
+//       if ($columnCount > 0) {
+//         echo "</div>"; // Close the last row for the cards
+//       }
+//     } else {
+//       // Handle the case where no recipe is found for the dish
+//       echo "<p>No recipes found for " . ucfirst($dish) . "</p>";
+//     }
+
+//     mysqli_free_result($result); // Free the result memory
+//   }
+// }
+
+// // Close any remaining open row (if there are less than 9 dishes)
+// if ($rowCount < 3) {
+//   echo "</div>"; // Close the last row for the cards
+// }
+?>
+
+<?php
+
+$dishes = array("biryani", "pizza", "burger", "beefPulao", "shawarma", "qorma", "mixSalad", "vegSalad", "fruitSalad", "vegPulao");
+$rowCount = 0; // Keeps track of the number of cards displayed in the current row
+
+if (isset($_SESSION['dietary_preference']) && $_SESSION['dietary_preference'] === "vegetarian") {
+  $filteredDishes = array("vegSalad", "vegPulao"); // Vegetarian options
+} else {
+  $filteredDishes = $dishes; // Show all dishes if not vegetarian
+}
+
+foreach ($filteredDishes as $dish) {
+  if ($dish) {
+    $query = "SELECT * FROM recipe WHERE recipe_name REGEXP '$dish'";
+    $result = mysqli_query($connect, $query);
+
+    if ($result) { // Check if query was successful
+      if (mysqli_num_rows($result) > 0) {
+        // Open a new row for every group of 3 dishes
+        if ($rowCount % 3 === 0) {
+          echo "<div class='row'>"; // Open a new row for the cards
+        }
+
+        while ($dish_data = mysqli_fetch_assoc($result)) {
+          echo "<div class='card col-sm-4' style='margin:1%; margin-left:2%; height:11%; width:28%'>"; // Set card size using Bootstrap class
+          // ... rest of the card display code remains the same ...
+          $rowCount++; // Increment counter for cards displayed in the current row
+
+          // Close the row if 3 cards have been displayed
+          if ($rowCount % 3 === 0) {
+            echo "</div>"; // Close the row for the cards
+          }
+        }
+
+        // Close any remaining open row (if there are less than 3 dishes left)
+        if (mysqli_num_rows($result) % 3 !== 0) {
+          echo "</div>"; // Close the last row for the cards
+        }
+      } else {
+        // Handle the case where no recipe is found for the dish
+        echo "<p>No recipes found for " . ucfirst($dish) . "</p>";
+      }
+    } else {
+      echo "<p>Error connecting to database.</p>"; // Inform user of connection error
+    }
+
+    mysqli_free_result($result); // Free the result memory
+  }
+}
+
+// No need for the final row check here, as rows are closed within the loop
+?>

@@ -207,7 +207,9 @@ function findQuantity(string $item): mixed
   }
 
   // Prepare a parameterized query to prevent SQL injection
-  $stmt = $conn->prepare("SELECT quantity FROM fooditem WHERE item_name REGEXP ?");
+  // $stmt = $conn->prepare("SELECT quantity FROM fooditem WHERE item_name REGEXP ?");
+  $stmt = $conn->prepare("SELECT quantity FROM fooditem WHERE item_name REGEXP ? AND `expiry_date` > CURDATE()");
+
   $stmt->bind_param("s", $item); // Bind the item as a string parameter
 
   $stmt->execute();
@@ -227,3 +229,6 @@ function findQuantity(string $item): mixed
 // Example usage
 
 
+function capitalise($data){
+  return ucfirst($data);
+}
