@@ -428,14 +428,33 @@ $emptyCheck = empty($toExpire);
 
 
 <?php 
-$itemName = "Bread";
-$quantity = findQuantity($itemName);
+$rice=findQuantity("rice");
+$chicken=findQuantity("chicken");
+$masala=findQuantity("masala");
 
-if ($quantity !== null) {
-  echo "Quantity of $itemName: $quantity";
-} else {
-  echo "$itemName not found in fooditem table.";
+// $biryani=$rice>=1 && $chicken>=1 && $masala>=1;
+$biryani=findQuantity("rice")>=1 && findQuantity('chicken')>=1 && findQuantity('masala')>=1;
+$pizza=findQuantity('dough')>=1 && findQuantity('tomato')>=1 && findQuantity('olives')>=1 && findQuantity('cheese')>=1 && findQuantity('sauces');
+$burger=findQuantity('bun')>=1 && findQuantity('chicken')>=1 && findQuantity('onion') && findQuantity('ketchup') && findQuantity('mayonese');
+$beefPulao=findQuantity('rice')>=1 && findQuantity('beef')>=1 && findQuantity('masala')>=1;
+$shawarma=findQuantity('shawarma bread')>=1 && findQuantity('mayonese') && findQuantity('chicken')>=1 && findQuantity('pickles')>=1 && findQuantity('sauces')>=1;
+$qorma=findQuantity('chicken')>=1 && findQuantity('masala')>=1 && findQuantity('tomato')>=1 && findQuantity('onion')>=1;
+
+if ($biryani){
+  echo "Biryani is available";
 }
+
+
+// $quantity = findQuantity($itemName);
+
+
+
+
+// if ($quantity !== null) {
+//   echo "Quantity of $itemName: $quantity";
+// } else {
+//   echo "$itemName not found in fooditem table.";
+// }
 ?>
 
 
