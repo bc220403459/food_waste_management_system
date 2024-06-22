@@ -1,0 +1,43 @@
+pizza
+dough, tomato, sauces, olive, oil, cheese, 
+italian
+fast_food
+40
+
+
+
+
+i have table named recipe with following columns,
+recipe_id auto-increment,
+recipe_name, 
+ingredients,
+cusine,
+meal_type,
+cooking_time (in minutes)
+
+
+write me 10 to 15 recipes like i have written below
+recipe_name: pizza
+ingredients: bread, dough, tomato, sauces, olive, oil, cheese, 
+cuisine: italian
+meal_type: fast_food
+cooking_time: 40
+
+
+
+
+
+
+
+
+INSERT INTO recipe (recipe_name, ingredients, cuisine, meal_type, cooking_time)
+VALUES
+  ('Spaghetti', 'ground beef, onion, garlic, tomatoes, tomato paste, pasta, Parmesan cheese, olive oil, salt, pepper', 'Italian', 'dinner', 45),
+  ('Chicken Stir-Fry', 'chicken breasts, vegetables, soy sauce, rice vinegar, cornstarch, brown sugar, ginger, garlic, sesame oil', 'Asian', 'dinner', 30),
+  ('Vegetarian Chili', 'kidney beans, black beans, pinto beans, vegetable broth, diced tomatoes, corn, onion, bell pepper, chili powder, cumin, oregano, garlic, salt, pepper', 'Tex-Mex', 'soup/stew', 60),
+  ('Salmon', 'salmon fillets, vegetables, olive oil, lemon juice, garlic, herbs, salt, pepper', 'Mediterranean', 'dinner', 30),
+  ('Chicken Salad', 'romaine lettuce, grilled chicken breasts, Parmesan cheese, croutons, Caesar salad dressing', 'American', 'lunch/salad', 20),
+  ('Burritos', 'ground beef, bread, chicken, cheese, toppings, sauces', 'Mexican', 'lunch/dinner', 30),
+  ('Pasta Primavera', 'pasta, vegetables, garlic, olive oil, Parmesan cheese, lemon juice, red pepper flakes', 'Italian', 'dinner', 30),
+  ('Tuna Salad Sandwiches', 'canned tuna, mayonnaise, celery, red onion, lemon juice, dill, salt, pepper, bread', 'American', 'lunch', 15),
+  ('Chicken and Vegetable Curry', 'chicken breasts, curry paste, coconut milk, vegetables, onion, garlic, ginger, rice', 'Indian', 'dinner', 45);
