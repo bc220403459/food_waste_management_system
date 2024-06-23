@@ -86,7 +86,7 @@ body {
                                 <div class="col-12 mb-4">
                                 <input type="hidden" name="item_id" value="<?php echo $result['item_id']; ?>" />
                                     <?php 
-                                    $sku=generateRandomString(11,true);
+                                    $sku=generateRandomNumberString();
                                     ?>
                                     <div class="input-group mb-1">
                                         <span class="input-group-text" id="basic-addon1">#</span>
@@ -164,3 +164,5 @@ body {
         </div>
     </div>
 </section>
+
+<?php include('../../includes/footer.php') ?>

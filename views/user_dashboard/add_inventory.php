@@ -91,11 +91,10 @@ body {
                             <div class="row">
                                 <div class="col-12 mb-4">
                                     <?php 
-                                    $sku=generateRandomString(11,true);
+                                    $sku=generateRandomNumberString();
                                     ?>
                                     <div class="input-group mb-1">
                                         <span class="input-group-text" id="basic-addon1">#</span>
-                                        <!-- <label for=""><strong>SKU</strong></label> -->
                                         <input type="text" id="sku" name="sku" class="form-control form-control"
                                             style="font-style:italic"
                                             placeholder="Item ID (this will be automatically generated)..."
@@ -156,3 +155,6 @@ body {
         </div>
     </div>
 </section>
+
+
+<?php include('../../includes/footer.php') ?>

@@ -103,11 +103,10 @@
                 <h6 class="">Dietary Preferences </h6>
                   <select class="select form-control" name="dietary_preference" required>
                     <option value="none" selected>None</option>
-                    <option value="vegan">Vegan</option>
                     <option value="vegetarian">Vegetarian</option>
+                    <option value="non_veg">Non-Veg</option>
                     <option value="gluten_free">Gluten Free</option>
                     <option value="dairy_free">Dairy Free</option>
-                    <option value="low_carb">Low Carb</option>
                     <option value="ketogenic">Ketogenic</option>
                   </select>
                 </div>
@@ -118,7 +117,6 @@
                     <option value="egg_allergy">Egg Allergy</option>
                     <option value="lactose_intolerance">Lactose Intolerance</option>
                     <option value="wheat_allergy">Wheat allergy</option>
-                    <option value="soy_allergy">Soy allergy</option>
                   </select>
                 </div>
               </div>

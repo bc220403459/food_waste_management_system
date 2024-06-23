@@ -30,7 +30,6 @@ if (isset($_SESSION['username'])) {
         }
     }
 
-    .rounded-image {}
 </style>
 <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
 <section class="vh-100">

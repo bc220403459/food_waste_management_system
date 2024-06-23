@@ -9,6 +9,9 @@ if (!isset($_SESSION['username'])) {
 }
 ?>
 <style>
+  body{
+    background-color: #F1ECE7;
+  }
   .dropdown-item-no-padding {
     margin-right: -20px;
   }
@@ -66,11 +69,6 @@ if (!isset($_SESSION['username'])) {
   }
 
   .storageTipsPrint {
-    /* background: linear-gradient(0deg, rgba(34,193,195,1) 22%, rgba(157,190,111,1) 50%, rgba(253,187,45,1) 100%); */
-    /* background: rgb(63,94,251);
-background: linear-gradient(311deg, rgba(63,94,251,1) 0%, rgba(252,70,107,1) 100%);  */
-    /* background: rgb(131,58,180);
-background: linear-gradient(90deg, rgba(131,58,180,1) 6%, rgba(253,29,29,1) 46%, rgba(252,176,69,1) 100%);  */
     background: rgb(238, 174, 202);
     background: radial-gradient(circle, rgba(238, 174, 202, 1) 0%, rgba(148, 187, 233, 1) 100%);
   }
@@ -80,8 +78,6 @@ background: linear-gradient(90deg, rgba(131,58,180,1) 6%, rgba(253,29,29,1) 46%,
 $toExpire = getExpiringFoodItems();
 $emptyCheck = empty($toExpire);
 ?>
-
-
 
 <h1>Dashboard</h1>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top d-flex justify-content-between"
@@ -93,7 +89,7 @@ $emptyCheck = empty($toExpire);
       aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <ul class="navbar-nav" style="margin-left:26% !important">
+    <ul class="navbar-nav" style="margin-left:8% !important">
       <li class="nav-item">
         <a class="nav-link " aria-current="page" href="user_dashboard.php">Home</a>
       </li>
@@ -103,8 +99,11 @@ $emptyCheck = empty($toExpire);
       <li class="nav-item">
         <a class="nav-link" href="feedback.php">Feedback</a>
       </li>
-      <li class="nav-item">
+      <li class="nav-item" >
       <a class="nav-link" href="storage_tips.php">Storage Tips</a>
+        </li>
+        <li class="nav-item" >
+      <a class="nav-link" href="available_recipes.php">Available Recipes</a>
         </li>
       <li class="nav-item">
         <button class="btn btn-outline-primary btn-sm tipsButton" data-bs-toggle="modal"
@@ -112,7 +111,6 @@ $emptyCheck = empty($toExpire);
           <i class="bi bi-lightbulb-fill"></i> Storage Tip of Day
         </button>
       </li>
-
       <li class="nav-item">
         <?php if (!$emptyCheck) {
           ?>
@@ -161,7 +159,6 @@ $emptyCheck = empty($toExpire);
           <h4 class="modal-title" id="expiryReminderLabel">Expiry Reminders</h4>
           <div class="text-end" style="margin-left:auto !important">
             <button type="button btn-outline-danger" class="close" data-dismiss="modal" aria-label="Close">
-
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
@@ -175,7 +172,6 @@ $emptyCheck = empty($toExpire);
                 <th>Expiry Date</th>
                 <th>Days Remaining</th>
                 <th>Storage Location</th>
-                <!-- <th>Status</th> -->
               </tr>
               <?php
               $expiringFoodItems = getExpiringFoodItems();
@@ -207,7 +203,6 @@ $emptyCheck = empty($toExpire);
                       }
                       ?>
                     </td>
-                    <!-- <td><?php //echo returnStatus($item['expiry_date']) ?></td> -->
                   </tr>
                   <?php
                 }
@@ -219,18 +214,6 @@ $emptyCheck = empty($toExpire);
           </div>
         </div>
         <div class="modal-footer">
-          <!-- <button type="button" class="btn btn-sm btn-primary reminderSettings">Settings</button>  -->
-          <!-- <script>
-                     $(document).ready(function() {
-                       $('#expiryReminder').on('shown.bs.modal', function () {
-                        $('.btn-primary').click(function() {
-                          // Open reminderSettings modal
-                          $('#reminderSettings').modal('show');
-                        });
-                      });
-                    });
-
-                    </script> -->
           <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">Close</button>
         </div>
       </div>
@@ -239,26 +222,10 @@ $emptyCheck = empty($toExpire);
 
   <div class="modal fade" id="reminderSettings" tabindex="-1" aria-labelledby="reminderSettingsLabel"
     aria-hidden="true">
-    <!-- <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="reminderSettingsLabel">Reminder Settings</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <p>This is the reminder settings modal content. You can add options to configure notification frequency, expiry thresholds, etc.</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save</button>
-      </div>
-    </div>
-  </div> -->
   </div>
 
 
 </div>
-<!-- Modal -->
 <div class="modal fade" id="storageTipsModal" tabindex="-1" aria-labelledby="storageTipsModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -270,12 +237,10 @@ $emptyCheck = empty($toExpire);
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-        <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
       </div>
       <div class="modal-body storageTipsBody">
         <p class="storageTipsPrint">
           <?php
-
           $storageTips = array(
             "<strong>Bananas:</strong> Keep bananas at room temperature until they ripen. Once ripe, store them in the refrigerator to extend their shelf life by a few days.",
             "<strong>Berries:</strong> Store berries in a single layer in a shallow container lined with paper towels to absorb moisture. Do not wash until ready to eat.",
@@ -293,17 +258,13 @@ $emptyCheck = empty($toExpire);
             "<strong>Tomatoes:</strong> Store tomatoes at room temperature away from direct sunlight. Refrigeration can alter their texture and flavor.",
             "<strong>Yogurt:</strong> Keep yogurt in the coldest part of the refrigerator, typically on a shelf rather than in the door, to maintain its freshness."
           );
-
           $randomTip = mt_rand(0, count($storageTips) - 1);
           echo $storageTips[$randomTip];
           ?>
         </p>
       </div>
       <div class="modal-footer">
-        <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> -->
-        <!-- <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">Close</button> -->
         <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">Close</button>
-
       </div>
     </div>
   </div>
@@ -326,16 +287,22 @@ $emptyCheck = empty($toExpire);
   <?php
   $deitaryPreference = $_SESSION['dietary_preference'];
   $alleryInfo = $_SESSION['allergy_info'];
-  $test = getExpiringFoodItems();
-  // dd($test);
   ?>
 </p>
 
 <div class="mt-4 mb-5">
-  <h1 class="text-center text-success">Welcome back, <em><?php echo $_SESSION['username'] ?></em></h1>
-  
-
-<p>Food suggestions for you according to your Dietary Preference:</p>
+  <a href="available_recipes.php" target="_blank">
+  <div class="text-end" >
+    <input type="text" name="search" placeholder="Search recipes...">
+    <button type="submit" class="btn btn-outline-primary btn-sm">Search</button>
+  </div>
+  </a>
+  <h1 class="text-center" style="color:#153448">Welcome Back, <strong><em><?php echo $_SESSION['username'] ?></em> <i class="bi bi-emoji-smile"></i></strong></h1>
+<div style="font-family:Book Antiqua">
+<br/>
+  <h3 class="mt-3" style="margin-left:0.5% !important"><em><strong> Food Suggestions for you:</strong></em></h3>
+  <p style="font-size:15pt; margin-left:0.5% !important"> Following recipes are being suggested to you as per your dietary preference and allergy info:</p>
+</div>  
 
 <?php
 $biryani=findQuantity("rice")>=1 && findQuantity('chicken')>=1 && findQuantity('masala')>=1;
@@ -348,362 +315,291 @@ $mixSalad=findQuantity('apple')>=1 && findQuantity('banana')>=1 && findQuantity(
 $vegSalad=findQuantity('beetroot')>=1 && findQuantity('cabbage')>=1 && findQuantity('cucumber')>=1 && findQuantity('carrot')>=1;
 $fruitSalad=findQuantity('apple')>=1 && findQuantity('banana')>=1 && findQuantity('guava')>=1 && findQuantity('melon')>=1 && findQuantity('watermelon')>=1;
 $vegPulao=findQuantity('rice')>=1 && findQuantity('potato')>=1 && findQuantity('masala')>=1;
-
-$vegan =($_SESSION['dietary_preference']="vegan");
-$vegetarian =($_SESSION['dietary_preference']="vegetarian");
-$gluten_free =($_SESSION['dietary_preference']="gluten_free");
-$dairy_free =($_SESSION['dietary_preference']="dairy_free");
-$low_carb =($_SESSION['dietary_preference']="low_carb");
-$ketogenic =($_SESSION['dietary_preference']="ketogenic");
-?>
-
-
-
-
-<?php 
-if ($biryani){
-  $query="SELECT * FROM recipe WHERE recipe_name REGEXP 'biryani' ";
-  $biryani=mysqli_query($connect,$query);
-  while($biryani_data=mysqli_fetch_assoc($biryani)){
-?>
-<div class="card" style="width: 18rem; margin-left:10px">
-  <div class="card-body">
-    <h5 class="card-title">Biryani</h5>
-    <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-    <p class="card-text">
-      <strong>Cuisine: </strong> <?php echo capitalise($biryani_data['cuisine']) ?> <br/>
-      <strong>Meal Type: </strong> <?php echo capitalise($biryani_data['meal_type']) ?><br/>
-      <strong>Cooking Time: </strong> <?php echo capitalise($biryani_data['cooking_time']) ?> minutes </br>
-    </p>
-    <p class="text-center">
-      <a href="feedback.php" class="card-link">Rate Recipe</a>
-    </p>
-  </div>
-</div>
-<?php
- }
-}
+$cake=findQuantity('flour')>=1 && findQuantity('sugar')>=1 && findQuantity('egg')>=1 && findQuantity('extract')>=1;
+$pasta=findQuantity('pasta')>=1 && findQuantity('sauce')>=1 && findQuantity('salt')>=1 && findQuantity('flour');
+$tea=findQuantity('tea powder')>=1 && findQuantity('sugar')>=1 && findQuantity('milk')>=1;
+$quinoaSalad=findQuantity('quinoa')>=1 && findQuantity('mint')>=1 && findQuantity('chicken')>=1;
+$sushi=findQuantity('fish')>=1 && findQuantity('seaweed')>=1 && findQuantity('wasabi')>=1 && findQuantity('rice');
+$coffee=findQuantity('coffee')>=1 && findQuantity('sugar')>=1 && findQuantity('milk')>=1;
+$mangoMilkShake=findQuantity('milk')>=1 && findQuantity('mango')>=1 && findQuantity('sugar')>=1;
+$scrambledEggs=findQuantity('egg')>=1 && findQuantity('salt')>=1;
 ?>
 </div>
 
 
 
-<?php
-// $dishes = array("biryani", "pizza", "burger", "beefPulao", "shawarma", "qorma", "mixSalad", "vegSalad", "fruitSalad", "vegPulao");
-
-// foreach ($dishes as $dish) {
-//   if ($dish) {
-//     $query = "SELECT * FROM recipe WHERE recipe_name REGEXP '$dish'";
-//     $result = mysqli_query($connect, $query);
-
-//     if (mysqli_num_rows($result) > 0) {
-//       while ($dish_data = mysqli_fetch_assoc($result)) {
-//         echo "<div class='card' style='width: 18rem; margin-left:10px'>";
-//         echo "<div class='card-body'>";
-//         echo "<h5 class='card-title'>" . ucfirst($dish) . "</h5>"; // Capitalize the first letter of the dish name
-//         echo "<h6 class='card-subtitle mb-2 text-muted'>Card subtitle</h6>";
-//         echo "<p class='card-text'>";
-//         echo "<strong>Cuisine: </strong>" . capitalise($dish_data['cuisine']) . "<br/>";
-//         echo "<strong>Meal Type: </strong>" . capitalise($dish_data['meal_type']) . "<br/>";
-//         echo "<strong>Cooking Time: </strong>" . capitalise($dish_data['cooking_time']) . " minutes </br>";
-//         echo "</p>";
-//         echo "<p class='text-center'>";
-//         echo "<a href='feedback.php' class='card-link'>Rate Recipe</a>";
-//         echo "</p>";
-//         echo "</div>";
-//         echo "</div>";
-//       }
-//     } else {
-//       // Handle the case where no recipe is found for the dish
-//       echo "<p>No recipes found for " . ucfirst($dish) . "</p>";
-//     }
-
-//     mysqli_free_result($result); // Free the result memory
-//   }
-// }
-?>
-
 
 <?php
-// $dishes = array("biryani", "pizza", "burger", "beefPulao", "shawarma", "qorma", "mixSalad", "vegSalad", "fruitSalad", "vegPulao");
-// $columnCount = 0; // Keeps track of the number of cards in the current column
+$rowCount = 0; 
+$columnCount = 0; 
 
-// foreach ($dishes as $dish) {
-//   if ($dish) {
-//     $query = "SELECT * FROM recipe WHERE recipe_name REGEXP '$dish'";
-//     $result = mysqli_query($connect, $query);
+if ($_SESSION['dietary_preference']==="ketogenic"){
+  $dishesList = array(
+    "biryani", 
+    // "pizza", 
+    "burger", 
+    "beefPulao", 
+    "shawarma", 
+    "qorma", 
+    // "mixSalad", 
+    // "vegSalad", 
+    // "fruitSalad", 
+    // "vegPulao", 
+    // "mangoMilkShake", 
+    // "cake", 
+    // "pasta", 
+    // "quinoaSalad", 
+    "sushi", 
+    "coffee",
+    "scrambledEggs"
+  );
+  if ($_SESSION['allergy_info']==='egg_allergy'){
+    $itemsToExclude=array("scrambledEggs", "cake");
+    $dishes = array_diff($dishesList, $itemsToExclude);
+  }
+  
+  if ($_SESSION['allergy_info']==='lactose_intolerance'){
+    $itemsToExclude=array( "coffee","mangoMilkShake","pizza","shawarma");
+    $dishes = array_diff($dishesList, $itemsToExclude);
+  }
+  
+  if ($_SESSION['allergy_info']==='wheat_allergy'){
+    $itemsToExclude=array("shawarma");
+    $dishes = array_diff($dishesList, $itemsToExclude);
+  }
 
-//     if (mysqli_num_rows($result) > 0) {
-//       if ($columnCount % 3 === 0) { // Start a new column every 3rd dish
-//         echo "<div class='row'>"; // Open a new row for the cards
-//       }
-
-//       while ($dish_data = mysqli_fetch_assoc($result)) {
-//         echo "<div class='card col-md-4' style='margin-left:10px'>"; // Set card width to fit 3 in a row
-//         echo "<div class='card-body'>";
-//         echo "<h5 class='card-title'>" . ucfirst($dish) . "</h5>"; // Capitalize the first letter of the dish name
-//         echo "<h6 class='card-subtitle mb-2 text-muted'>Card subtitle</h6>";
-//         echo "<p class='card-text'>";
-//         echo "<strong>Cuisine: </strong>" . capitalise($dish_data['cuisine']) . "<br/>";
-//         echo "<strong>Meal Type: </strong>" . capitalise($dish_data['meal_type']) . "<br/>";
-//         echo "<strong>Cooking Time: </strong>" . capitalise($dish_data['cooking_time']) . " minutes </br>";
-//         echo "</p>";
-//         echo "<p class='text-center'>";
-//         echo "<a href='feedback.php' class='card-link'>Rate Recipe</a>";
-//         echo "</p>";
-//         echo "</div>";
-//         echo "</div>";
-//         $columnCount++; // Increment card counter
-//       }
-
-//       if ($columnCount % 3 === 0) { // Close the row if 3 cards are displayed
-//         echo "</div>"; // Close the row for the cards
-//       }
-//     } else {
-//       // Handle the case where no recipe is found for the dish
-//       echo "<p>No recipes found for " . ucfirst($dish) . "</p>";
-//     }
-
-//     mysqli_free_result($result); // Free the result memory
-//   }
-// }
-
-// // Close any remaining open row (if there are less than 3 dishes)
-// if ($columnCount % 3 !== 0) {
-//   echo "</div>"; // Close the last row for the cards
-// }
-?>
-
-
-<?php
-// $dishes = array("biryani", "pizza", "burger", "beefPulao", "shawarma", "qorma", "mixSalad", "vegSalad", "fruitSalad", "vegPulao");
-// $rowCount = 0; // Keeps track of the number of rows
-// $columnCount = 0; // Keeps track of the number of cards in the current row
-
-// foreach ($dishes as $dish) {
-//   if ($dish) {
-//     $query = "SELECT * FROM recipe WHERE recipe_name REGEXP '$dish'";
-//     $result = mysqli_query($connect, $query);
-
-//     if (mysqli_num_rows($result) > 0) {
-//       if ($rowCount === 0) { // Open a new row for the first dish
-//         echo "<div class='row'>"; // Open a new row for the cards
-//       }
-
-//       while ($dish_data = mysqli_fetch_assoc($result)) {
-//         echo "<div class='card col-md-4' style='width: 400px; height: 200px; margin: 10px;'>"; // Set card dimensions and margin
-//         echo "<div class='card-body'>";
-//         echo "<h5 class='card-title'>" . ucfirst($dish) . "</h5>"; // Capitalize the first letter of the dish name
-//         echo "<h6 class='card-subtitle mb-2 text-muted'>Card subtitle</h6>";
-//         echo "<p class='card-text'>";
-//         echo "<strong>Cuisine: </strong>" . capitalise($dish_data['cuisine']) . "<br/>";
-//         echo "<strong>Meal Type: </strong>" . capitalise($dish_data['meal_type']) . "<br/>";
-//         echo "<strong>Cooking Time: </strong>" . capitalise($dish_data['cooking_time']) . " minutes </br>";
-//         echo "</p>";
-//         echo "<p class='text-center'>";
-//         echo "<a href='feedback.php' class='card-link'>Rate Recipe</a>";
-//         echo "</p>";
-//         echo "</div>";
-//         echo "</div>";
-//         $columnCount++;
-
-//         if ($columnCount % 3 === 0) { // Close the row if 3 cards are displayed
-//           echo "</div>"; // Close the row for the cards
-//           $rowCount++; // Increment row counter
-//           $columnCount = 0; // Reset column counter for the next row
-//         }
-//       }
-
-//       // Close any remaining open row (if there are less than 3 dishes in the last row)
-//       if ($columnCount > 0) {
-//         echo "</div>"; // Close the last row for the cards
-//       }
-//     } else {
-//       // Handle the case where no recipe is found for the dish
-//       echo "<p>No recipes found for " . ucfirst($dish) . "</p>";
-//     }
-
-//     mysqli_free_result($result); // Free the result memory
-//   }
-// }
-
-// // Close any remaining open row (if there are less than 9 dishes)
-// if ($rowCount < 3) {
-//   echo "</div>"; // Close the
-// }
-?>
-
-
-
-<?php
-// $dishes = array("biryani", "pizza", "burger", "beefPulao", "shawarma", "qorma", "mixSalad", "vegSalad", "fruitSalad", "vegPulao");
-// $rowCount = 0; // Keeps track of the number of rows
-// $columnCount = 0; // Keeps track of the number of cards in the current row
-
-// foreach ($dishes as $dish) {
-//   if ($dish) {
-//     $query = "SELECT * FROM recipe WHERE recipe_name REGEXP '$dish'";
-//     $result = mysqli_query($connect, $query);
-
-//     if (mysqli_num_rows($result) > 0) {
-//       if ($rowCount === 0) { // Open a new row for the first dish
-//         echo "<div class='row'>"; // Open a new row for the cards
-//       }
-
-//       while ($dish_data = mysqli_fetch_assoc($result)) {
-//         echo "<div class='card col d-flex justify-content-center' >"; // Set card dimensions and margin
-//         echo "<div class='card-body'>";
-//         echo "<h5 class='card-title'>" . ucfirst($dish) . "</h5>"; // Capitalize the first letter of the dish name
-//         echo "<h6 class='card-subtitle mb-2 text-muted'>Card subtitle</h6>";
-//         echo "<p class='card-text'>";
-//         echo "<strong>Cuisine: </strong>" . capitalise($dish_data['cuisine']) . "<br/>";
-//         echo "<strong>Meal Type: </strong>" . capitalise($dish_data['meal_type']) . "<br/>";
-//         echo "<strong>Cooking Time: </strong>" . capitalise($dish_data['cooking_time']) . " minutes </br>";
-//         echo "</p>";
-//         echo "<p class='text-center'>";
-//         echo "<a href='feedback.php' class='card-link'>Rate Recipe</a>";
-//         echo "</p>";
-//         echo "</div>";
-//         echo "</div>";
-//         $columnCount++;
-
-//         if ($columnCount % 3 === 0) { // Close the row if 3 cards are displayed
-//           echo "</div>"; // Close the row for the cards
-//           $rowCount++; // Increment row counter
-//           $columnCount = 0; // Reset column counter for the next row
-//         }
-//       }
-
-//       // Close any remaining open row (if there are less than 3 dishes in the last row)
-//       if ($columnCount > 0) {
-//         echo "</div>"; // Close the last row for the cards
-//       }
-//     } else {
-//       // Handle the case where no recipe is found for the dish
-//       echo "<p>No recipes found for " . ucfirst($dish) . "</p>";
-//     }
-
-//     mysqli_free_result($result); // Free the result memory
-//   }
-// }
-
-// // Close any remaining open row (if there are less than 9 dishes)
-// if ($rowCount < 3) {
-//   echo "</div>"; // Close the last row for the cards
-// }
-?>
-
-<?php
-//! PERFECT WORKING CODE BELOW 
-?>
-
-<?php
-// $dishes = array("biryani", "pizza", "burger", "beefPulao", "shawarma", "qorma", "mixSalad", "vegSalad", "fruitSalad", "vegPulao");
-// $rowCount = 0; // Keeps track of the number of rows
-// $columnCount = 0; // Keeps track of the number of cards in the current row
-
-// foreach ($dishes as $dish) {
-//   if ($dish) {
-//     $query = "SELECT * FROM recipe WHERE recipe_name REGEXP '$dish'";
-//     $result = mysqli_query($connect, $query);
-
-//     if (mysqli_num_rows($result) > 0) {
-//       if ($rowCount === 0) { // Open a new row for the first dish
-//         echo "<div class='row'>"; // Open a new row for the cards
-//       }
-
-//       while ($dish_data = mysqli_fetch_assoc($result)) {
-//         echo "<div class='card col-sm-4' style='margin:1%; margin-left:2%; height:11%; width:28%'>"; // Set card size using Bootstrap class
-//         echo "<div class='card-body'>";
-//         echo "<h5 class='card-title'>" . ucfirst($dish) . "</h5>"; // Capitalize the first letter of the dish name
-//         echo "<h6 class='card-subtitle mb-2 text-muted'>Card subtitle</h6>";
-//         echo "<p class='card-text'>";
-//         echo "<strong>Cuisine: </strong>" . capitalise($dish_data['cuisine']) . "<br/>";
-//         echo "<strong>Meal Type: </strong>" . capitalise($dish_data['meal_type']) . "<br/>";
-//         echo "<strong>Cooking Time: </strong>" . capitalise($dish_data['cooking_time']) . " minutes </br>";
-//         echo "</p>";
-//         echo "<p class='text-center'>";
-//         echo "<a href='feedback.php' class='card-link'>Rate Recipe</a>";
-//         echo "</p>";
-//         echo "</div>";
-//         echo "</div>";
-//         $columnCount++;
-
-//         if ($columnCount % 3 === 0) { // Close the row if 3 cards are displayed
-//           echo "</div>"; // Close the row for the cards
-//           $rowCount++; // Increment row counter
-//           $columnCount = 0; // Reset column counter for the next row
-//         }
-//       }
-
-//       // Close any remaining open row (if there are less than 3 dishes in the last row)
-//       if ($columnCount > 0) {
-//         echo "</div>"; // Close the last row for the cards
-//       }
-//     } else {
-//       // Handle the case where no recipe is found for the dish
-//       echo "<p>No recipes found for " . ucfirst($dish) . "</p>";
-//     }
-
-//     mysqli_free_result($result); // Free the result memory
-//   }
-// }
-
-// // Close any remaining open row (if there are less than 9 dishes)
-// if ($rowCount < 3) {
-//   echo "</div>"; // Close the last row for the cards
-// }
-?>
-
-<?php
-
-$dishes = array("biryani", "pizza", "burger", "beefPulao", "shawarma", "qorma", "mixSalad", "vegSalad", "fruitSalad", "vegPulao");
-$rowCount = 0; // Keeps track of the number of cards displayed in the current row
-
-if (isset($_SESSION['dietary_preference']) && $_SESSION['dietary_preference'] === "vegetarian") {
-  $filteredDishes = array("vegSalad", "vegPulao"); // Vegetarian options
-} else {
-  $filteredDishes = $dishes; // Show all dishes if not vegetarian
-}
-
-foreach ($filteredDishes as $dish) {
-  if ($dish) {
-    $query = "SELECT * FROM recipe WHERE recipe_name REGEXP '$dish'";
-    $result = mysqli_query($connect, $query);
-
-    if ($result) { // Check if query was successful
-      if (mysqli_num_rows($result) > 0) {
-        // Open a new row for every group of 3 dishes
-        if ($rowCount % 3 === 0) {
-          echo "<div class='row'>"; // Open a new row for the cards
-        }
-
-        while ($dish_data = mysqli_fetch_assoc($result)) {
-          echo "<div class='card col-sm-4' style='margin:1%; margin-left:2%; height:11%; width:28%'>"; // Set card size using Bootstrap class
-          // ... rest of the card display code remains the same ...
-          $rowCount++; // Increment counter for cards displayed in the current row
-
-          // Close the row if 3 cards have been displayed
-          if ($rowCount % 3 === 0) {
-            echo "</div>"; // Close the row for the cards
-          }
-        }
-
-        // Close any remaining open row (if there are less than 3 dishes left)
-        if (mysqli_num_rows($result) % 3 !== 0) {
-          echo "</div>"; // Close the last row for the cards
-        }
-      } else {
-        // Handle the case where no recipe is found for the dish
-        echo "<p>No recipes found for " . ucfirst($dish) . "</p>";
-      }
-    } else {
-      echo "<p>Error connecting to database.</p>"; // Inform user of connection error
-    }
-
-    mysqli_free_result($result); // Free the result memory
+  if ($_SESSION['allergy_info']==='none') {
+    $dishes = $dishesList;
   }
 }
 
-// No need for the final row check here, as rows are closed within the loop
+else if ($_SESSION['dietary_preference']==="gluten_free"){
+  $dishesList = array(
+    "biryani", 
+    //"pizza", 
+    //"burger", 
+    "beefPulao", 
+    //"shawarma", 
+    "qorma", 
+    "mixSalad", 
+    "vegSalad", 
+    "fruitSalad", 
+    "vegPulao", 
+    // "mangoMilkShake", 
+    // "cake", 
+    // "pasta", 
+    "quinoaSalad", 
+    "sushi", 
+    "coffee",
+    "scrambledEggs"
+  );
+  if ($_SESSION['allergy_info']==='egg_allergy'){
+    $itemsToExclude=array("scrambledEggs", "cake");
+    $dishes = array_diff($dishesList, $itemsToExclude);
+  }
+  
+  if ($_SESSION['allergy_info']==='lactose_intolerance'){
+    $itemsToExclude=array( "coffee","mangoMilkShake","pizza","shawarma");
+    $dishes = array_diff($dishesList, $itemsToExclude);
+  }
+  
+  if ($_SESSION['allergy_info']==='wheat_allergy'){
+    $itemsToExclude=array("shawarma");
+    $dishes = array_diff($dishesList, $itemsToExclude);
+  }
+
+  if ($_SESSION['allergy_info']==='none') {
+    $dishes = $dishesList;
+  }
+}
+
+else if ($_SESSION['dietary_preference']==="dairy_free"){
+  $dishesList = array(
+    "biryani", 
+    // "pizza", 
+    "burger", 
+    "beefPulao", 
+    // "shawarma", 
+    "qorma", 
+    "mixSalad", 
+    "vegSalad", 
+    "fruitSalad", 
+    "vegPulao", 
+    // "mangoMilkShake", 
+    "cake", 
+    // "pasta", 
+    //  
+    "quinoaSalad", 
+    "sushi", 
+    //"coffee",
+    "scrambledEggs"
+  );
+  if ($_SESSION['allergy_info']==='egg_allergy'){
+    $itemsToExclude=array("scrambledEggs", "cake");
+    $dishes = array_diff($dishesList, $itemsToExclude);
+  }
+  
+  if ($_SESSION['allergy_info']==='lactose_intolerance'){
+    $itemsToExclude=array( "coffee","mangoMilkShake","pizza","shawarma");
+    $dishes = array_diff($dishesList, $itemsToExclude);
+  }
+  
+  if ($_SESSION['allergy_info']==='wheat_allergy'){
+    $itemsToExclude=array("shawarma");
+    $dishes = array_diff($dishesList, $itemsToExclude);
+  }
+
+  if ($_SESSION['allergy_info']==='none') {
+    $dishes = $dishesList;
+  }
+}
+
+else if ($_SESSION['dietary_preference']==="vegetarian"){
+  $dishesList = array(
+    // "biryani", 
+    // "pizza", 
+    // "burger", 
+    // "beefPulao", 
+    // "shawarma", 
+    // "qorma", 
+    "mixSalad", 
+    "vegSalad", 
+    "fruitSalad", 
+    "vegPulao", 
+    // "mangoMilkShake", 
+    "cake", 
+    "pasta", 
+     
+    "quinoaSalad", 
+    // "sushi", 
+    "coffee",
+    "scrambledEggs"
+  );
+  if ($_SESSION['allergy_info']==='egg_allergy'){
+    $itemsToExclude=array("scrambledEggs", "cake");
+    $dishes = array_diff($dishesList, $itemsToExclude);
+  }
+  
+  if ($_SESSION['allergy_info']==='lactose_intolerance'){
+    $itemsToExclude=array( "coffee","mangoMilkShake","pizza","shawarma");
+    $dishes = array_diff($dishesList, $itemsToExclude);
+  }
+  
+  if ($_SESSION['allergy_info']==='wheat_allergy'){
+    $itemsToExclude=array("shawarma");
+    $dishes = array_diff($dishesList, $itemsToExclude);
+  }
+
+  if ($_SESSION['allergy_info']==='none') {
+    $dishes = $dishesList;
+  }
+}
+
+else if ($_SESSION['dietary_preference'] === "non_veg") {
+  $dishesList = array(
+    "biryani",
+    "pizza",
+    "burger",
+    "beefPulao",
+    "shawarma",
+    "qorma",
+    // "mixSalad",
+    // "vegSalad",
+    // "fruitSalad",
+    // "vegPulao",
+    "mangoMilkShake",
+    "cake",
+    "pasta",
+    // "quinoaSalad",
+    "sushi",
+    "coffee",
+    "scrambledEggs"
+  );
+
+  if ($_SESSION['allergy_info']==='egg_allergy'){
+    $itemsToExclude=array("scrambledEggs", "cake");
+    $dishes = array_diff($dishesList, $itemsToExclude);
+  }
+  
+  if ($_SESSION['allergy_info']==='lactose_intolerance'){
+    $itemsToExclude=array( "coffee","mangoMilkShake","pizza","shawarma");
+    $dishes = array_diff($dishesList, $itemsToExclude);
+  }
+  
+  if ($_SESSION['allergy_info']==='wheat_allergy'){
+    $itemsToExclude=array("shawarma");
+    $dishes = array_diff($dishesList, $itemsToExclude);
+  }
+
+  if ($_SESSION['allergy_info']==='none') {
+    $dishes = $dishesList;
+  }
+}
+
+else{
+  $dishes = array(
+    "biryani", 
+    "pizza", 
+    "burger", 
+    "beefPulao", 
+    "shawarma", 
+    "qorma", 
+    "mixSalad", 
+    "vegSalad", 
+    "fruitSalad", 
+    "vegPulao", 
+    "mangoMilkShake", 
+    "cake", 
+    "pasta",   
+    "quinoaSalad", 
+    "sushi", 
+    "coffee",
+    "scrambledEggs");
+
+}
+
+foreach ($dishes as $dish) {
+  if ($dish) {
+    $query = "SELECT * FROM recipe WHERE recipe_name REGEXP '$dish' ORDER BY cooking_time ASC";
+    $result = mysqli_query($connect, $query);
+
+    if (mysqli_num_rows($result) > 0) {
+      if ($columnCount === 0) { 
+        echo "<div class='row' style='margin-left:1%'>"; 
+      }
+
+      while ($dish_data = mysqli_fetch_assoc($result)) {
+        echo "<div class='card col-sm-4' style='margin:1%; margin-left:2%; height:11%; width:28%; background-color: #E7F0DC;'>"; 
+        echo "<div class='card-body'>";
+        echo "<h5 class='card-title'><strong>" . ucfirst($dish) . "</strong></h5>"; 
+        echo "<h6 class='card-subtitle mb-2 text-muted'>Recommended for you</h6>";
+        echo "<p class='card-text'>";
+        echo "<strong>Cuisine: </strong>" . capitalise($dish_data['cuisine']) . "<br/>";
+        echo "<strong>Meal Type: </strong>" . capitalise($dish_data['meal_type']) . "<br/>";
+        echo "<strong>Cooking Time: </strong>" . capitalise($dish_data['cooking_time']) . " minutes </br>";
+        echo "</p>";
+        echo "<p class='text-center'>";
+        echo "<a href='feedback.php' class='card-link btn btn-sm btn-success'>Rate Recipe</a>";
+        echo "</p>";
+        echo "</div>";
+        echo "</div>";
+        $columnCount++;
+
+        if ($columnCount % 3 === 0) { 
+          echo "</div>"; 
+          $rowCount++; 
+          $columnCount = 0; 
+        }
+      }
+    } else {
+      echo "<p>No recipes found for " . ucfirst($dish) . "</p>";
+    }
+
+    mysqli_free_result($result);
+  }
+}
+
+if ($columnCount > 0) {
+  echo "</div>"; 
+}
 ?>
