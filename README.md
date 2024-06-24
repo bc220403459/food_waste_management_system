@@ -17,3 +17,13 @@ This folder contains the latest backup of database which includes all the tables
 
 ## images
 This folder contains all the images used during development of project
+
+## includes
+This folder contains header and footer files in which I have loaded complete Bootstrap through CDN
+
+## pages
+This folder contains sign-in and login page's UI
+
+## views
+### user_dashboard
+This folder contains all the UI that user will require to operate through the system
