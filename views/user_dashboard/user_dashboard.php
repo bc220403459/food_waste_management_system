@@ -84,7 +84,7 @@ $emptyCheck = empty($toExpire);
   style="margin-bottom:10px !important">
   <div class="container-fluid">
     <a class="navbar-brand" href="user_dashboard.php"><em><strong> <img src="../../images/favicon.ico" alt=""
-            style="height:30px; width:30px"> Food Waste Management System</strong></em></a>
+            style="height:30px; width:30px"> Food Waste Reduction System</strong></em></a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
       aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
